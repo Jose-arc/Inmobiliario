@@ -11,6 +11,9 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './pages/home/home.component';
 import { LoginComponent } from './pages/login/login.component';
 import { RegistroComponent } from './pages/registro/registro.component';
+import { NoticiasComponent } from './pages/noticias/noticias.component';
+import { OferenteComponent } from './pages/oferente/oferente.component';
+import { PropiedadesComponent } from './pages/propiedades/propiedades.component';
 //End
 
 @NgModule({
@@ -18,7 +21,10 @@ import { RegistroComponent } from './pages/registro/registro.component';
     AppComponent,
     HomeComponent,
     LoginComponent,
-    RegistroComponent
+    RegistroComponent,
+    NoticiasComponent,
+    OferenteComponent,
+    PropiedadesComponent
   ],
   imports: [
     BrowserModule,
