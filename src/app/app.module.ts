@@ -14,6 +14,7 @@ import { RegistroComponent } from './pages/registro/registro.component';
 import { NoticiasComponent } from './pages/noticias/noticias.component';
 import { OferenteComponent } from './pages/oferente/oferente.component';
 import { PropiedadesComponent } from './pages/propiedades/propiedades.component';
+import { AddNoticiasComponent } from './pages/add-noticias/add-noticias.component';
 //End
 
 @NgModule({
@@ -24,7 +25,8 @@ import { PropiedadesComponent } from './pages/propiedades/propiedades.component'
     RegistroComponent,
     NoticiasComponent,
     OferenteComponent,
-    PropiedadesComponent
+    PropiedadesComponent,
+    AddNoticiasComponent
   ],
   imports: [
     BrowserModule,
