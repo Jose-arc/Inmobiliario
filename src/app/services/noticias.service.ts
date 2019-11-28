@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 
 //Imports
 import { HttpClient,HttpHeaders,HttpParams } from '@angular/common/http';
-import  'rxjs/add/operator/map';
+// import  'rxjs/add/operator/map';
 import { Observable, from } from 'rxjs';
 
 //Global URL
@@ -46,5 +46,15 @@ export class NoticiasService {
     return this.http.post(this.api_rest+'noticias',params, {headers: headers});
 
   }
+
+  makeId(){
+    let result = 'news-';
+    let characters = 'abcdefghijklmnopqrstvwxyz0123456789';
+    let charactersLength = characters.length;
+    for ( let i = 0; i < 7; i++ ) {
+       result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    }
+    return result;
+ }
 
 }

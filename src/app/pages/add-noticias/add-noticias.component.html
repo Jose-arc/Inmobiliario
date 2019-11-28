@@ -1,80 +1,114 @@
-<div class="page-wrapper bg-gra-02 p-t-130 p-b-100 font-poppins">
-    <div class="wrapper wrapper--w680">
-        <div class="card card-4">
-            <div class="card-body">
-                <h2 class="title">Registration Form</h2>
-                <form method="POST">
-                    <div class="row row-space">
-                        <div class="col-2">
-                            <div class="input-group">
-                                <label class="label">first name</label>
-                                <input class="input--style-4" type="text" name="first_name">
-                            </div>
-                        </div>
-                        <div class="col-2">
-                            <div class="input-group">
-                                <label class="label">last name</label>
-                                <input class="input--style-4" type="text" name="last_name">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row row-space">
-                        <div class="col-2">
-                            <div class="input-group">
-                                <label class="label">Birthday</label>
-                                <div class="input-group-icon">
-                                    <input class="input--style-4 js-datepicker" type="text" name="birthday">
-                                    <i class="zmdi zmdi-calendar-note input-icon js-btn-calendar"></i>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-2">
-                            <div class="input-group">
-                                <label class="label">Gender</label>
-                                <div class="p-t-10">
-                                    <label class="radio-container m-r-45">Male
-                                        <input type="radio" checked="checked" name="gender">
-                                        <span class="checkmark"></span>
-                                    </label>
-                                    <label class="radio-container">Female
-                                        <input type="radio" name="gender">
-                                        <span class="checkmark"></span>
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row row-space">
-                        <div class="col-2">
-                            <div class="input-group">
-                                <label class="label">Email</label>
-                                <input class="input--style-4" type="email" name="email">
-                            </div>
-                        </div>
-                        <div class="col-2">
-                            <div class="input-group">
-                                <label class="label">Phone Number</label>
-                                <input class="input--style-4" type="text" name="phone">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="input-group">
-                        <label class="label">Subject</label>
-                        <div class="rs-select2 js-select-simple select--no-search">
-                            <select name="subject">
-                                <option disabled="disabled" selected="selected">Choose option</option>
-                                <option>Subject 1</option>
-                                <option>Subject 2</option>
-                                <option>Subject 3</option>
-                            </select>
-                            <div class="select-dropdown"></div>
-                        </div>
-                    </div>
-                    <div class="p-t-15">
-                        <button class="btn btn--radius-2 btn--blue" type="submit">Submit</button>
-                    </div>
-                </form>
+
+<div class="container-fluid">
+		<div class="container">
+			<div class="formBox">
+                    <div class="row">
+							<div class="col-sm-12">
+								<h1>{{titulo}}</h1>
+							</div>
+						</div>
+				<form #formNoticias="ngForm" (ngSubmit)="onSubmit()">
+					
+						<div class="row">
+							<div class="col-sm-6">
+								<div class="inputBox ">
+									<div class="inputText">Id noticia</div>
+                                    <input type="text" #idnoticias="ngModel" name="idnoticias" 
+                                    [(ngModel)]="noticias.idnoticias" class="input" disabled required >
+								</div>
+							</div>
+
+							<div class="col-sm-6">
+								<div class="inputBox">
+									<div class="inputText">Titulo</div>
+                                    <input type="text" #titulo="ngModel" name="titulo" 
+                                    [(ngModel)]="noticias.titulo" class="input" required>
+								</div>
+							</div>
+						</div>
+
+                        
+                        <div class="row">
+							<div class="col-sm-6">
+								<div class="inputBox">
+									<div class="inputText">Imagen</div>
+                                    <input type="text" #imagen="ngModel" name="imagen"
+                                    [(ngModel)]="noticias.imagen" class="input" required>
+                                    <div class="input-group-append">
+                                        <button class="btn btn-outline-secondary" data-toggle="modal" data-target=".bd-example-modal-lg" type="button">Elegir Imagen</button>
+                                  </div>
+								</div>
+							</div>
+
+							<div class="col-sm-6">
+								<div class="inputBox">
+									<div class="inputText">Fecha</div>
+                                    <input type="text" #fecha="ngModel" name="fecha" 
+                                    [(ngModel)]="noticias.fecha" class="input" disabled required>
+								</div>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="col-sm-12">
+								<div class="inputBox">
+									<div class="inputText">Cuerpo noticia</div>
+                                    <textarea class="input" #body="ngModel" name="body" 
+                                    [(ngModel)]="noticias.body" required></textarea>
+								</div>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="col-sm-12">
+								<input type="submit" name="" class="button" value="Subir noticia">
+							</div>
+						</div>
+				</form>
+			</div>
+		</div>
+    </div>
+    
+    <!--Modal Selector image-->
+    <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Seleccionar imagen</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. A architecto aspernatur dolorem 
+                        atque reiciendis error itaque explicabo molestiae amet facere ab optio, sit perspiciatis 
+                        exercitationem sed unde qui reprehenderit dolor porro doloremque, animi ipsam nostrum harum! 
+                        Architecto ut suscipit voluptatum magni perspiciatis non?</p>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-info" data-toggle="modal" data-target=".bd-example-modal-lg-image" type="button" data-dismiss="modal">Subir Imagen</button>
+                    <button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
+                </div>
             </div>
         </div>
     </div>
-</div>
+    <!--End-->
+
+    <!--Modal Upload imagen-->
+    <div class="modal fade bd-example-modal-lg-image" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Subir imagen</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="file-loading">
+                            <input id="input-21" type="file" accept="image/*">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-info" data-dismiss="modal" data-toggle="modal" data-target=".bd-example-modal-lg">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <!--End-->
