@@ -56,5 +56,5 @@ export class NoticiasService {
     }
     return result;
  }
-
+ 
 }

@@ -1,5 +1,5 @@
-import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
 
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
@@ -17,6 +17,10 @@ import { PropiedadesComponent } from './pages/propiedades/propiedades.component'
 import { AddNoticiasComponent } from './pages/add-noticias/add-noticias.component';
 //End
 
+//Pipes
+import { UrlimgPipe } from './pipes/urlimg.pipe';
+//end
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -26,7 +30,8 @@ import { AddNoticiasComponent } from './pages/add-noticias/add-noticias.componen
     NoticiasComponent,
     OferenteComponent,
     PropiedadesComponent,
-    AddNoticiasComponent
+    AddNoticiasComponent,
+    UrlimgPipe
   ],
   imports: [
     BrowserModule,

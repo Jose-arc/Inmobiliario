@@ -7,6 +7,8 @@ import { Observable, from } from 'rxjs';
 
 //Global URL
 import { GLOBAL } from '../models/global';
+import { Bancoimg } from '../models/banco.model';
+
 
 
 @Injectable({
@@ -14,7 +16,14 @@ import { GLOBAL } from '../models/global';
 })
 export class GlobalsService {
 
-  constructor( public http : HttpClient ) { }
+    public api_rest: string;
+    public api_rest_full: string;
+
+  constructor( public http : HttpClient ) { 
+
+    this.api_rest = GLOBAL.api_rest;
+
+  }
 
   getFecha(){
     let date = new Date()
@@ -57,6 +66,22 @@ export class GlobalsService {
         xhr.send(formData);
     });
 }
+
+addbanco(banco: Bancoimg): Observable<any>{
+    let json = JSON.stringify(banco);
+    let params = "banco="+json;
+    let headers = new HttpHeaders().set('Content-Type','application/x-www-form-urlencoded');
+     
+    return this.http.post(this.api_rest+'banco', params, {headers: headers});
+  }
+  
+  getBanco():Observable<any>{
+    return this.http.get(this.api_rest+'banco');
+  }
+  
+  getBancoDetalle(id):Observable<any>{
+    return this.http.get(this.api_rest+'banco/'+id);
+  }
 
 }
 

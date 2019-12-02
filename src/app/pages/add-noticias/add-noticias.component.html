@@ -1,10 +1,11 @@
+<script src="../../../assets/js/main.js"></script>
 
 <div class="container-fluid">
 		<div class="container">
 			<div class="formBox">
                     <div class="row">
 							<div class="col-sm-12">
-								<h1>{{titulo}}</h1>
+								<h1>Noticias</h1>
 							</div>
 						</div>
 				<form #formNoticias="ngForm" (ngSubmit)="onSubmit()">
@@ -33,7 +34,7 @@
 								<div class="inputBox">
 									<div class="inputText">Imagen</div>
                                     <input type="text" #imagen="ngModel" name="imagen"
-                                    [(ngModel)]="noticias.imagen" class="input" required>
+                                    [(ngModel)]="noticias.imagen" class="input" id="image" required>
                                     <div class="input-group-append">
                                         <button class="btn btn-outline-secondary" data-toggle="modal" data-target=".bd-example-modal-lg" type="button">Elegir Imagen</button>
                                   </div>
@@ -47,7 +48,18 @@
                                     [(ngModel)]="noticias.fecha" class="input" disabled required>
 								</div>
 							</div>
-						</div>
+                        </div>
+                        
+                        <!--Imagenes agregadas
+                        <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="inputBox">
+                                        <div class="inputText">Imagenes seleccionadas</div>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                       end-->
 
 						<div class="row">
 							<div class="col-sm-12">
@@ -78,12 +90,19 @@
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
                 <div class="modal-body">
-                    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. A architecto aspernatur dolorem 
-                        atque reiciendis error itaque explicabo molestiae amet facere ab optio, sit perspiciatis 
-                        exercitationem sed unde qui reprehenderit dolor porro doloremque, animi ipsam nostrum harum! 
-                        Architecto ut suscipit voluptatum magni perspiciatis non?</p>
+                        <div class="row">
+                                <div class="col-md-3" *ngFor="let i of bancoImg; let b=index">
+                                    <div class="custom-control custom-checkbox image-checkbox">
+                                        <input type="checkbox" class="custom-control-input" id="ck1a{{b}}" value="{{i.Nombre}}">
+                                        <label class="custom-control-label" for="ck1a{{b}}">
+                                            <img src="http://localhost/bd/api-rest/img-uploads/{{i.Nombre}}" alt="#" class="img-fluid">
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
                 </div>
                 <div class="modal-footer">
+                    <button type="button" class="btn btn-info" data-dismiss="modal" id="seleccionar">Seleccionar</button>
                     <button class="btn btn-info" data-toggle="modal" data-target=".bd-example-modal-lg-image" type="button" data-dismiss="modal">Subir Imagen</button>
                     <button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
                 </div>
@@ -102,10 +121,11 @@
                     </div>
                     <div class="modal-body">
                         <div class="file-loading">
-                            <input id="input-21" type="file" accept="image/*">
+                            <input id="input-20" type="file" accept="image/*" (change)="fileChangeEvent($event)">
                         </div>
                     </div>
                     <div class="modal-footer">
+                            <button type="button" class="btn btn-info" data-dismiss="modal" (click)="uploadFileBD()">Subir</button>
                         <button type="button" class="btn btn-info" data-dismiss="modal" data-toggle="modal" data-target=".bd-example-modal-lg">Close</button>
                     </div>
                 </div>
