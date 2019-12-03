@@ -1,5 +1,4 @@
-<script src="../../../assets/js/main.js"></script>
-
+<form #formNoticias="ngForm" (ngSubmit)="onSubmit()">
 <div class="container-fluid">
 		<div class="container">
 			<div class="formBox">
@@ -8,7 +7,7 @@
 								<h1>Noticias</h1>
 							</div>
 						</div>
-				<form #formNoticias="ngForm" (ngSubmit)="onSubmit()">
+				
 					
 						<div class="row">
 							<div class="col-sm-6">
@@ -76,7 +75,7 @@
 								<input type="submit" name="" class="button" value="Subir noticia">
 							</div>
 						</div>
-				</form>
+				
 			</div>
 		</div>
     </div>
@@ -93,7 +92,7 @@
                         <div class="row">
                                 <div class="col-md-3" *ngFor="let i of bancoImg; let b=index">
                                     <div class="custom-control custom-checkbox image-checkbox">
-                                        <input type="checkbox" class="custom-control-input" id="ck1a{{b}}" value="{{i.Nombre}}">
+                                        <input type="checkbox" class="custom-control-input" id="ck1a{{b}}" value="{{i.Nombre}}" (click)="toggle(i.Nombre)">
                                         <label class="custom-control-label" for="ck1a{{b}}">
                                             <img src="http://localhost/bd/api-rest/img-uploads/{{i.Nombre}}" alt="#" class="img-fluid">
                                         </label>
@@ -102,7 +101,7 @@
                             </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-info" data-dismiss="modal" id="seleccionar">Seleccionar</button>
+                    <button type="button" class="btn btn-info" data-dismiss="modal" (click)="select()">Seleccionar</button>
                     <button class="btn btn-info" data-toggle="modal" data-target=".bd-example-modal-lg-image" type="button" data-dismiss="modal">Subir Imagen</button>
                     <button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
                 </div>
@@ -132,3 +131,4 @@
             </div>
         </div>
     <!--End-->
+</form>

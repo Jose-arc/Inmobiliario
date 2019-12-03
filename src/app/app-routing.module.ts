@@ -9,7 +9,7 @@ import { NoticiasComponent } from './pages/noticias/noticias.component';
 import { OferenteComponent } from './pages/oferente/oferente.component';
 import { PropiedadesComponent } from './pages/propiedades/propiedades.component';
 import { AddNoticiasComponent } from './pages/add-noticias/add-noticias.component';
-
+import { NoticiaDetailComponent } from './pages/noticia-detail/noticia-detail.component';
 // End
 
 //Guard
@@ -20,6 +20,7 @@ const routes: Routes = [
   { path: 'home' , component:HomeComponent, canActivate: [ AuthGuard ] },
   { path: 'noticias' , component:NoticiasComponent, canActivate: [ AuthGuard ] },
   { path: 'add-noticia' , component:AddNoticiasComponent, canActivate: [ AuthGuard ] },
+  { path: 'noticia/:id' , component:NoticiaDetailComponent, canActivate: [ AuthGuard ] },
   { path: 'oferente' , component:OferenteComponent, canActivate: [ AuthGuard ] },
   { path: 'propiedades' , component:PropiedadesComponent, canActivate: [ AuthGuard ] },
   { path: 'registro' , component:RegistroComponent },

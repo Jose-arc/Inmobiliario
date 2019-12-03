@@ -15,10 +15,11 @@ import { NoticiasComponent } from './pages/noticias/noticias.component';
 import { OferenteComponent } from './pages/oferente/oferente.component';
 import { PropiedadesComponent } from './pages/propiedades/propiedades.component';
 import { AddNoticiasComponent } from './pages/add-noticias/add-noticias.component';
+import { NoticiaDetailComponent } from './pages/noticia-detail/noticia-detail.component';
 //End
 
 //Pipes
-import { UrlimgPipe } from './pipes/urlimg.pipe';
+import { FirstimgPipe } from './pipes/firstimg.pipe';
 //end
 
 @NgModule({
@@ -31,7 +32,8 @@ import { UrlimgPipe } from './pipes/urlimg.pipe';
     OferenteComponent,
     PropiedadesComponent,
     AddNoticiasComponent,
-    UrlimgPipe
+    NoticiaDetailComponent,
+    FirstimgPipe
   ],
   imports: [
     BrowserModule,

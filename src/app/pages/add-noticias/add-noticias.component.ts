@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter } from '@angular/core';
 
 // Imports
 import { Router } from '@angular/router';
@@ -25,7 +25,12 @@ export class AddNoticiasComponent implements OnInit {
   public fechaActual;
   public idNews;
   public bancoImg : any[];
-  public imgSeleccionadas : any[];
+  public selected = [];
+
+  //Array de subir imagen al BD
+  public img : any[];
+
+  selectedChange:EventEmitter<any> = new EventEmitter();
 
   constructor(private _ns: NoticiasService,
               private _g: GlobalsService,
@@ -91,6 +96,13 @@ export class AddNoticiasComponent implements OnInit {
     console.log(this.archivosParaSubir);
 
 }
+
+toggle(value){
+  var index = this.selected.indexOf(value);
+  if (index === -1) this.selected.push(value);
+  else this.selected.splice(index, 1);
+  this.selectedChange.emit(this.selected);
+ }
 
 uploadFileBD(){
 
@@ -163,6 +175,13 @@ getBancoImg(){
       console.log(error);
     }
   );
+}
+
+select(){
+  this.img = this.selected;
+
+  this.noticias.imagen = this.img.toString();
+
 }
 
 
