@@ -117,22 +117,22 @@
       <div class="row">
         <div class="col-lg-4 col-md-6 mb-4" *ngFor="let noticia of noticias">
           <div class="card h-100">
-            <a [routerLink]="['/noticia', noticia.Id]"
+            <a [routerLink]="['/noticia', noticia.id]"
               ><img
                 class="card-img-top"
                 src="http://localhost/bd/api-rest/img-uploads/{{
-                  noticia.Imagen | firstimg
+                  noticia.imagen | firstimg
                 }}"
                 alt=""
             /></a>
             <div class="card-body">
               <h4 class="card-title">
-                <a [routerLink]="['/noticia', noticia.Id]">{{
-                  noticia.Titulo
+                <a [routerLink]="['/noticia', noticia.id]">{{
+                  noticia.titulo
                 }}</a>
               </h4>
               <!-- <h5>$24.99</h5> -->
-              <p class="card-text">{{ noticia.Body }}</p>
+              <p class="card-text">{{ noticia.body }}</p>
             </div>
             <div class="card-footer">
               <small class="text-muted">{{ noticia.fecha }}</small>
@@ -141,16 +141,20 @@
 
               <button
                 class="btn btn-sm btn-danger"
-                (click)="borrarConfirmado(noticia.Id)"
+                (click)="borrarConfirmado(noticia.id)"
               >
                 <i class="fa fa-trash"></i>
               </button>
 
               &nbsp;
 
-              <button class="btn btn-sm btn-primary">
+              <a
+                [routerLink]="['/noticia-update', noticia.id]"
+                routerLinkActive="router-link-active"
+                class="btn btn-sm btn-primary"
+              >
                 <i class="fa fa-edit"></i>
-              </button>
+              </a>
             </div>
           </div>
         </div>

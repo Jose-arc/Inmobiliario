@@ -37,7 +37,7 @@ export class NoticiaDetailComponent implements OnInit {
         resp => {
           if (resp.code == 200) {
             this.noticia_detail = resp.data;
-            this.imgs = this._g.separadorImagenes(resp.data.Imagen);
+            this.imgs = this._g.separadorImagenes(resp.data.imagen);
 
             console.log(this.noticia_detail);
             console.log(this.imgs);
