@@ -21,8 +21,10 @@ export class AddNoticiasComponent implements OnInit {
   public archivosParaSubir;
   public resultadoSubida;
   public fechaActual;
+  public fullFecha;
   public idNews;
   public bancoImg: any[];
+  public tipo : any[];
   public selected = [];
   public titleBoton;
 
@@ -37,14 +39,16 @@ export class AddNoticiasComponent implements OnInit {
     private _router: Router
   ) {
     this.fechaActual = _g.getFecha();
+    this.fullFecha = _g.fullFecha();
     this.idNews = _ns.makeId();
-    this.noticias = new Noticias("", this.idNews, "", "", "", this.fechaActual);
+    this.noticias = new Noticias("", this.idNews, "", "", "", this.fechaActual,"",this.fullFecha,"");
     this.banco = new Bancoimg("", "");
     this.titleBoton = "Subir noticia";
   }
 
   ngOnInit() {
     this.getBancoImg();
+    this.getTipo();
   }
 
   onSubmit() {
@@ -162,5 +166,21 @@ export class AddNoticiasComponent implements OnInit {
     this.img = this.selected;
 
     this.noticias.imagen = this.img.toString();
+  }
+
+  getTipo() {
+    this._g.getTipo().subscribe(
+      result => {
+        if (result.code != 200) {
+          console.log(result);
+        } else {
+          // this.tipo = result.mensaje;
+          console.log(this.tipo);
+        }
+      },
+      error => {
+        console.log(error);
+      }
+    );
   }
 }

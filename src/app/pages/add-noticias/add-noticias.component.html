@@ -81,6 +81,37 @@
           </div>
         </div>
 
+        <div class="row">
+            <div class="col-sm-6">
+              <div class="inputBox ">
+                <div class="inputText">Escrito por</div>
+                <input
+                  type="text"
+                  #By="ngModel"
+                  name="By"
+                  [(ngModel)]="noticias.by"
+                  class="input"
+                  required
+                />
+              </div>
+            </div>
+  
+            <div class="col-sm-6" *ngIf="tipo">
+              <select class="browser-default custom-select" #Categoria="ngModel" name="Categoria" [(ngModel)]="noticias.categoria">
+                  <option *ngFor="let i of tipo" value="{{i.Id}}">{{i.Nombre}}</option>
+              </select>
+            </div>
+
+            <div class="col-sm-6" *ngIf="!tipo">
+                <select class="browser-default custom-select" #Categoria="ngModel" name="Categoria" [(ngModel)]="noticias.categoria">
+                    <option value="0">Inmobiliaria</option>
+                    <option value="1">Constructora</option>
+                    <option value="2">Particular</option>
+                    <option value="3">Corredor</option>
+                  </select>
+            </div>
+          </div>
+
         <!--Imagenes agregadas
                         <div class="row">
                                 <div class="col-sm-12">

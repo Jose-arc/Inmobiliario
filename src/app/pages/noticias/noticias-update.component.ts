@@ -18,7 +18,7 @@ export class NoticiaUpdateComponent {
     private _route: ActivatedRoute,
     private _router: Router
   ) {
-    this.noticias = new Noticias("", "", "", "", "", "");
+    this.noticias = new Noticias("", "", "", "", "", "","","","");
     this.titleBoton = "Modificar noticia";
   }
 

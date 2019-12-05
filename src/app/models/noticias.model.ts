@@ -5,6 +5,9 @@ export class Noticias {
     public titulo: string,
     public imagen: string,
     public body: string,
-    public fecha: string
+    public fecha: string,
+    public by: string,
+    public fullfecha : string,
+    public categoria : string
   ) {}
 }

@@ -21,6 +21,7 @@ import { NoticiaUpdateComponent } from "./pages/noticias/noticias-update.compone
 
 //Pipes
 import { FirstimgPipe } from "./pipes/firstimg.pipe";
+import { AcortadorTextPipe } from './pipes/acortador-text.pipe';
 //end
 
 @NgModule({
@@ -35,7 +36,8 @@ import { FirstimgPipe } from "./pipes/firstimg.pipe";
     AddNoticiasComponent,
     NoticiaDetailComponent,
     FirstimgPipe,
-    NoticiaUpdateComponent
+    NoticiaUpdateComponent,
+    AcortadorTextPipe
   ],
   imports: [BrowserModule, FormsModule, HttpClientModule, AppRoutingModule],
   providers: [],
