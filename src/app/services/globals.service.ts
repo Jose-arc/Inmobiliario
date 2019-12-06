@@ -128,8 +128,16 @@ export class GlobalsService {
     return images;
   }
 
+  //Stored Procedures
+
+  //End SP
+
+  //Views
+
   getTipo(): Observable<any> {
     return this.http.get(this.api_rest + "tipo");
   }
+
+  //End Views
   
 }

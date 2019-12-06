@@ -30,6 +30,10 @@ export class NoticiasService {
     return this.http.get(this.api_rest + "noticias/" + id);
   }
 
+  getListCategoriaNoticia(id): Observable<any> {
+    return this.http.get(this.api_rest + "categorianoticia/" + id);
+  }
+
   deleteNoticia(id): Observable<any> {
     return this.http.get(this.api_rest + "noticias-delete/" + id);
   }

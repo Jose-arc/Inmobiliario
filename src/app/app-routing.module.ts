@@ -11,7 +11,7 @@ import { PropiedadesComponent } from "./pages/propiedades/propiedades.component"
 import { AddNoticiasComponent } from "./pages/add-noticias/add-noticias.component";
 import { NoticiaDetailComponent } from "./pages/noticia-detail/noticia-detail.component";
 import { NoticiaUpdateComponent } from "./pages/noticias/noticias-update.component";
-
+import { ListcategorianoticiasComponent } from './pages/listcategorianoticias/listcategorianoticias.component';
 // End
 
 //Guard
@@ -29,6 +29,11 @@ const routes: Routes = [
   {
     path: "noticia/:id",
     component: NoticiaDetailComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: "categoria-noticia/:id",
+    component: ListcategorianoticiasComponent,
     canActivate: [AuthGuard]
   },
   {

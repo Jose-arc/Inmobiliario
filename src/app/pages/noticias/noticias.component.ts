@@ -18,6 +18,7 @@ import { Bancoimg } from "src/app/models/banco.model";
 export class NoticiasComponent implements OnInit {
   public titulo: string;
   public noticias: any[];
+  public tipo : any[];
 
   constructor(
     private _ns: NoticiasService,
@@ -29,6 +30,7 @@ export class NoticiasComponent implements OnInit {
 
   ngOnInit() {
     this.getNoticias();
+    this.getTipo();
   }
 
   getNoticias() {
@@ -103,5 +105,16 @@ export class NoticiasComponent implements OnInit {
         });
       }
     );
+  }
+
+  getTipo() {
+    this._g.getTipo().subscribe(result => {
+      if (result.code != 200) {
+        console.log(result);
+      } else {
+        this.tipo = result.mensaje;
+        console.log(result.mensaje);
+      }
+    });
   }
 }

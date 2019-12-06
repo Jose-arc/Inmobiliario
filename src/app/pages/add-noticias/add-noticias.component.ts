@@ -41,7 +41,7 @@ export class AddNoticiasComponent implements OnInit {
     this.fechaActual = _g.getFecha();
     this.fullFecha = _g.fullFecha();
     this.idNews = _ns.makeId();
-    this.noticias = new Noticias("", this.idNews, "", "", "", this.fechaActual,"",this.fullFecha,"");
+    this.noticias = new Noticias("", this.idNews, "", "", "", this.fechaActual,"",this.fullFecha,"0");
     this.banco = new Bancoimg("", "");
     this.titleBoton = "Subir noticia";
   }
