@@ -225,19 +225,13 @@
         <div class="card-body">
           <div class="row">
             <div class="col-lg-6">
-              <ul class="list-unstyled mb-0">
-                <li>
-                  <a href="#">Web Design</a>
-                </li>
-                <li>
-                  <a href="#">HTML</a>
-                </li>
-                <li>
-                  <a href="#">Freebies</a>
+              <ul class="list-unstyled mb-0" *ngIf="categorias">
+                <li *ngFor="let i of categorias">
+                  <a [routerLink]="['/categoria-noticia',i.Id]">{{i.Nombre}}</a>
                 </li>
               </ul>
             </div>
-            <div class="col-lg-6">
+            <!-- <div class="col-lg-6">
               <ul class="list-unstyled mb-0">
                 <li>
                   <a href="#">JavaScript</a>
@@ -249,7 +243,7 @@
                   <a href="#">Tutorials</a>
                 </li>
               </ul>
-            </div>
+            </div> -->
           </div>
         </div>
       </div>

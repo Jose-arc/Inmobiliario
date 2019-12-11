@@ -139,5 +139,6 @@ export class GlobalsService {
   }
 
   //End Views
+
   
 }

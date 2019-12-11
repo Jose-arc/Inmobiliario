@@ -34,12 +34,31 @@ export class NoticiasComponent implements OnInit {
   }
 
   getNoticias() {
+
+    Swal.fire({
+      
+      allowOutsideClick: false,
+      icon: 'info',
+      text: 'Espere por favor'
+
+    });
+    Swal.showLoading();
+
     this._ns.getNoticias().subscribe(result => {
       if (result.code != 200) {
-        console.log(result);
+        //console.log(result);
+        Swal.fire({
+      
+          allowOutsideClick: false,
+          icon: 'warning',
+          title: 'Categoria Noticias',
+          text: result.mensaje
+    
+        });
       } else {
         this.noticias = result.mensaje;
-        console.log(result.mensaje);
+        Swal.close();
+        //console.log(result.mensaje);
       }
     });
   }

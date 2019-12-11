@@ -12,6 +12,8 @@ import { AddNoticiasComponent } from "./pages/add-noticias/add-noticias.componen
 import { NoticiaDetailComponent } from "./pages/noticia-detail/noticia-detail.component";
 import { NoticiaUpdateComponent } from "./pages/noticias/noticias-update.component";
 import { ListcategorianoticiasComponent } from './pages/listcategorianoticias/listcategorianoticias.component';
+import { AddOferenteComponent } from './pages/add-oferente/add-oferente.component';
+import { OferenteUpdateComponent } from './pages/oferente/oferente-update.component';
 // End
 
 //Guard
@@ -43,6 +45,16 @@ const routes: Routes = [
   },
 
   { path: "oferente", component: OferenteComponent, canActivate: [AuthGuard] },
+  {
+    path: "add-oferente",
+    component: AddOferenteComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: "oferente-update/:id",
+    component: OferenteUpdateComponent,
+    canActivate: [AuthGuard]
+  },
   {
     path: "propiedades",
     component: PropiedadesComponent,

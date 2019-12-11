@@ -17,12 +17,16 @@ import { PropiedadesComponent } from "./pages/propiedades/propiedades.component"
 import { AddNoticiasComponent } from "./pages/add-noticias/add-noticias.component";
 import { NoticiaDetailComponent } from "./pages/noticia-detail/noticia-detail.component";
 import { NoticiaUpdateComponent } from "./pages/noticias/noticias-update.component";
+import { ListcategorianoticiasComponent } from './pages/listcategorianoticias/listcategorianoticias.component';
+import { AddOferenteComponent } from './pages/add-oferente/add-oferente.component';
+import { ListcategoriaoferenteComponent } from './pages/listcategoriaoferente/listcategoriaoferente.component';
+import { OferenteUpdateComponent } from './pages/oferente/oferente-update.component';
+
 //End
 
 //Pipes
 import { FirstimgPipe } from "./pipes/firstimg.pipe";
 import { AcortadorTextPipe } from './pipes/acortador-text.pipe';
-import { ListcategorianoticiasComponent } from './pages/listcategorianoticias/listcategorianoticias.component';
 //end
 
 @NgModule({
@@ -39,7 +43,10 @@ import { ListcategorianoticiasComponent } from './pages/listcategorianoticias/li
     FirstimgPipe,
     NoticiaUpdateComponent,
     AcortadorTextPipe,
-    ListcategorianoticiasComponent
+    ListcategorianoticiasComponent,
+    AddOferenteComponent,
+    ListcategoriaoferenteComponent,
+    OferenteUpdateComponent
   ],
   imports: [BrowserModule, FormsModule, HttpClientModule, AppRoutingModule],
   providers: [],
