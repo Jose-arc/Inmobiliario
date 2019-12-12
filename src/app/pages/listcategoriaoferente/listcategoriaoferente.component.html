@@ -108,19 +108,23 @@
               </a>
             </div>
       
-            <div class="row" *ngIf="noticias_categoria">
+            <div class="row" *ngIf="oferente_categoria">
                 <div class="container">
                     <div class="card-group vgr-cards">
-                      <div class="card" *ngFor="let i of noticias_categoria">
+                      <div class="card" *ngFor="let i of oferente_categoria">
                         <div class="card-img-body">
                         <img class="card-img" src="http://localhost/bd/api-rest/img-uploads/{{
-                          i.imagen | firstimg
+                          i.image_oferente | firstimg
                         }}" alt="Card image cap">
                         </div>
                         <div class="card-body">
-                          <h4 class="card-title">{{ i.titulo }}</h4>
-                          <p class="card-text">{{ i.body | acortadorText }}</p>
-                          <a [routerLink]="['/noticia', i.id]" class="btn btn-outline-primary">Ver más</a>
+                          <h4 class="card-title">{{ i.nombre }}</h4>
+                          <p class="card-text">{{ i.direccion}}</p>
+                          <p class="card-text">{{ i.rut}}</p>
+                          <button class="btn btn-outline-primary"
+                          (click)="detail(i.id)"
+                            data-toggle="modal"
+                            data-target=".bd-example-modal-lg-detail">Ver más</button>
                         </div>
                       </div>
                       <!-- <div class="card">
@@ -142,6 +146,56 @@
         <!-- /.row -->
       </div>
       <!-- /.container -->
+
+      <!--Modal detalle Oferente-->
+<div
+class="modal fade bd-example-modal-lg-detail"
+tabindex="-1"
+role="dialog"
+aria-labelledby="myLargeModalLabel"
+aria-hidden="true">
+<div class="modal-dialog modal-lg">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h4 class="modal-title">Oferente</h4>
+      <button type="button" class="close" data-dismiss="modal">
+        &times;
+      </button>
+    </div>
+    <div class="modal-body">
+      <div class="row">
+
+          <div class="col-lg-12 col-md-12 mb-4">
+              <div class="card h-100">
+                  <a href="#"><img class="card-img-top" id="myimg" src="" alt=""></a>
+                  <div class="card-body">
+                      <h4 class="card-title">
+                          <a href="#" id="nombre"></a>
+                      </h4>
+                      <h5 id="rut"></h5>
+                      <h5 id="direccion"></h5>
+                      <h5 id="email"></h5>
+                      <h5 id="telefono"></h5>
+                      <h5 id="siteweb"></h5>
+                      
+                  </div>
+                  <div class="card-footer">
+                      <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
+                  </div>
+              </div>
+          </div>
+        
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-info" data-dismiss="modal">
+        Close
+      </button>
+    </div>
+  </div>
+</div>
+</div>
+<!--End modal detalle Oferente-->
       
       <!-- Footer -->
       <footer class="py-5 bg-dark">

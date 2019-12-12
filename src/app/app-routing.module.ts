@@ -14,6 +14,7 @@ import { NoticiaUpdateComponent } from "./pages/noticias/noticias-update.compone
 import { ListcategorianoticiasComponent } from './pages/listcategorianoticias/listcategorianoticias.component';
 import { AddOferenteComponent } from './pages/add-oferente/add-oferente.component';
 import { OferenteUpdateComponent } from './pages/oferente/oferente-update.component';
+import { ListcategoriaoferenteComponent } from './pages/listcategoriaoferente/listcategoriaoferente.component';
 // End
 
 //Guard
@@ -53,6 +54,11 @@ const routes: Routes = [
   {
     path: "oferente-update/:id",
     component: OferenteUpdateComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: "categoria-oferente/:id",
+    component: ListcategoriaoferenteComponent,
     canActivate: [AuthGuard]
   },
   {
