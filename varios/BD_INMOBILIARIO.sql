@@ -6,7 +6,7 @@ USE bt_inmobiliario;
 DROP TABLE IF EXISTS oferente;
 CREATE TABLE IF NOT EXISTS oferente (
     id int PRIMARY KEY  NOT NULL AUTO_INCREMENT,
-    nombre varchar(255) NULL,
+    nombre varchar(max) NULL,
     rut varchar(20) NULL,
     direccion varchar(255) NULL,
     email varchar(255) NULL,
@@ -2354,7 +2354,9 @@ CREATE TABLE IF NOT EXISTS `propiedades` (
     banco varchar(255) NULL,
     dividendo varchar(255) NULL,
     anosPlazo varchar(255) NULL,
-    ispago
+    ispago int NULL,
+    fecha varchar(255) NULL,
+    orden int NULL,
     PRIMARY KEY (Id)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=0;
 --End
@@ -2364,9 +2366,9 @@ DROP TABLE IF EXISTS `proyectos`;
 CREATE TABLE IF NOT EXISTS `proyectos` (
     id int NOT NULL AUTO_INCREMENT,
     idproyecto varchar(255) NULL,
-    nombre varchar(255) NULL,
-    imagen varchar(255) NULL, 
-    body varchar(255) NULL,
+    nombre varchar(max) NULL,
+    imagen varchar(max) NULL, 
+    body varchar(max) NULL,
     direccionproyecto varchar(255) NULL,
     PRIMARY KEY (Id)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=0;
@@ -2377,9 +2379,9 @@ DROP TABLE IF EXISTS `noticias`;
 CREATE TABLE IF NOT EXISTS `noticias` (
     id int NOT NULL AUTO_INCREMENT,
     idnoticias varchar(255) NULL,
-    titulo varchar(255) NULL,
-    imagen varchar(255) NULL, 
-    body varchar(255) NULL,
+    titulo varchar(max) NULL,
+    imagen varchar(max) NULL, 
+    body varchar(max) NULL,
     fecha varchar(255) NULL,
     PRIMARY KEY (Id)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=0;
