@@ -18,7 +18,7 @@ export class OferenteService {
   public api_rest: string;
   public api_rest_full: string;
 
-  constructor( public http: HttpClient) { 
+  constructor( public http: HttpClient ) { 
 
     this.api_rest = GLOBAL.api_rest;
   }

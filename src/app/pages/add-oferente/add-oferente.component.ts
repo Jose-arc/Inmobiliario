@@ -16,7 +16,7 @@ import { Bancoimg } from "src/app/models/banco.model";
   providers: [OferenteService]
 })
 export class AddOferenteComponent implements OnInit {
-
+  
   public oferente : Oferente;
   public idOferente;
   public banco : Bancoimg;

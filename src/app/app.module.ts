@@ -27,6 +27,7 @@ import { OferenteUpdateComponent } from './pages/oferente/oferente-update.compon
 //Pipes
 import { FirstimgPipe } from "./pipes/firstimg.pipe";
 import { AcortadorTextPipe } from './pipes/acortador-text.pipe';
+import { AddPropiedadComponent } from './pages/add-propiedad/add-propiedad.component';
 //end
 
 @NgModule({
@@ -46,7 +47,8 @@ import { AcortadorTextPipe } from './pipes/acortador-text.pipe';
     ListcategorianoticiasComponent,
     AddOferenteComponent,
     ListcategoriaoferenteComponent,
-    OferenteUpdateComponent
+    OferenteUpdateComponent,
+    AddPropiedadComponent
   ],
   imports: [BrowserModule, FormsModule, HttpClientModule, AppRoutingModule],
   providers: [],

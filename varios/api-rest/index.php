@@ -1136,45 +1136,110 @@ $app->get('/tipo',function() use($app,$db){
 });
 //END
 
-//TEST LOGIN
-//Probar Stored Procedure
-//Login
-$app->post('/login',function() use($app,$db){
-    
-    $json = $app->request->post('login');
-    $data = json_decode($json,true);
+//LISTA TIPOPROPIEDAD
+$app->get('/tipopropiedad',function() use($app,$db){
 
-    if (!isset($data['correo'])) {
-        $data['correo'] = null;
+    $query = "SELECT * FROM vista_tipopropiedad;";
+    $list = $db->query($query);
+
+    $tipo = array();
+    while ($i = $list->fetch_assoc()) {
+        $tipo[] = $i;
     }
 
-    if (!isset($data['contrasena'])) {
-        $data['contrasena'] = null;
-    }
-
-    $query = 'SELECT CheckPassword('."'{$data['correo']}'".' , '."'{$data['contrasena']}'".')';
-
-    $insert = $db->query($query);
-    
-    $result = array(
-        'status' => 'error',
-        'code' => '404',
-        'mensaje' => 'Error'
-    );
-
-    if($insert){
+    if ($tipo != null) {
+        
         $result = array(
             'status' => 'success',
             'code' => '200',
-            'mensaje' => $insert
+            'mensaje' => $tipo
         );
+
+    }else{
+
+        $result = array(
+            'code' => '404',
+            'status' => 'error',
+            'mensaje' => 'No hay registros'
+        );
+
     }
-    //echo $insert;
-    echo json_encode($data['correo']);
+
+
+    echo json_encode($result);
 
 });
+//END
 
-//END LOGIN
+//LISTAR FORMATO
+$app->get('/formato',function() use($app,$db){
+
+    $query = "SELECT * FROM vista_formato;";
+    $list = $db->query($query);
+
+    $tipo = array();
+    while ($i = $list->fetch_assoc()) {
+        $tipo[] = $i;
+    }
+
+    if ($tipo != null) {
+        
+        $result = array(
+            'status' => 'success',
+            'code' => '200',
+            'mensaje' => $tipo
+        );
+
+    }else{
+
+        $result = array(
+            'code' => '404',
+            'status' => 'error',
+            'mensaje' => 'No hay registros'
+        );
+
+    }
+
+
+    echo json_encode($result);
+
+});
+//END
+
+//LISTAR TIPO ENTREGA
+$app->get('/entrega',function() use($app,$db){
+
+    $query = "SELECT * FROM vista_entrega;";
+    $list = $db->query($query);
+
+    $tipo = array();
+    while ($i = $list->fetch_assoc()) {
+        $tipo[] = $i;
+    }
+
+    if ($tipo != null) {
+        
+        $result = array(
+            'status' => 'success',
+            'code' => '200',
+            'mensaje' => $tipo
+        );
+
+    }else{
+
+        $result = array(
+            'code' => '404',
+            'status' => 'error',
+            'mensaje' => 'No hay registros'
+        );
+
+    }
+
+
+    echo json_encode($result);
+
+});
+//END
 
 
 $app->run(); //ejecuta todo los metodos insertos en este PHP

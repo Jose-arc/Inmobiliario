@@ -1,0 +1,301 @@
+<form #formPropiedad="ngForm" (ngSubmit)="onSubmit()">
+    <div class="container-fluid">
+        <div class="container">
+            <div class="formBox">
+
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="inputBox ">
+                            <div class="inputText">Ciudad</div>
+                            <input type="text" #ciudad="ngModel" name="ciudad" [(ngModel)]="propiedad.ciudad" class="input" required />
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6">
+                        <div class="inputBox">
+                            <div class="inputText">Comuna</div>
+                            <input type="text" #comuna="ngModel" name="comuna" [(ngModel)]="propiedad.comuna" class="input" required />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="inputBox">
+                            <div class="inputText">Imagen</div>
+                            <input type="text" #image_propiedad="ngModel" name="image_propiedad" [(ngModel)]="propiedad.image_propiedad" class="input" id="image" required />
+                            <div class="input-group-append">
+                                <button class="btn btn-outline-secondary" data-toggle="modal" data-target=".bd-example-modal-lg-elegir" data-dismiss="modal" type="button">
+                              Elegir Imagen
+                            </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6">
+                        <div class="inputBox">
+                            <div class="inputText">Calle y Numero</div>
+                            <input type="text" #calleandnumber="ngModel" name="calleandnumber" [(ngModel)]="propiedad.calleandnumber" class="input" required />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="inputBox ">
+                            <div class="inputText">Valor en UF</div>
+                            <input type="text" #uf="ngModel" name="uf" [(ngModel)]="propiedad.uf" class="input" required />
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6" *ngIf="formato">
+                        <select class="browser-default custom-select" #idformato="ngModel" name="idtipo" [(ngModel)]="propiedad.idformato">
+                              <option *ngFor="let i of formato" value="{{i.Id}}">{{i.Nombre}}</option>
+                          </select>
+                    </div>
+
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="inputBox ">
+                            <div class="inputText">Moneda local</div>
+                            <input type="text" #monedalocal="ngModel" name="monedalocal" [(ngModel)]="propiedad.monedalocal" class="input" required />
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6">
+                        <div class="inputBox">
+                            <div class="inputText">MT2 Totales</div>
+                            <input type="text" #mt2totales="ngModel" name="mt2totales" [(ngModel)]="propiedad.mt2totales" class="input" required />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="inputBox ">
+                            <div class="inputText">MT2 construidos</div>
+                            <input type="text" #mt2construidos="ngModel" name="mt2construidos" [(ngModel)]="propiedad.mt2construidos" class="input" required />
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6">
+                        <div class="inputBox">
+                            <div class="inputText">Modelos</div>
+                            <input type="text" #modelos="ngModel" name="modelos" [(ngModel)]="propiedad.modelos" class="input" id="image" required />
+                            <div class="input-group-append">
+                                <button class="btn btn-outline-secondary" data-toggle="modal" data-target=".bd-example-modal-lg-elegir" data-dismiss="modal" type="button">
+                              Elegir Imagen
+                            </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <button id="locate-position" class="uk-button uk-button-success"><i class="fa fa-map-marker"></i></button>
+                        <div id="map"></div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-6" *ngIf="tipopropiedad">
+                        <select class="browser-default custom-select" #tipoprop="ngModel" name="tipoprop" [(ngModel)]="propiedad.tipoprop">
+                              <option *ngFor="let i of tipopropiedad" value="{{i.Id}}">{{i.Nombre}}</option>
+                          </select>
+                    </div>
+
+
+                    <div class="col-sm-6">
+                        <div class="inputBox ">
+                            <div class="inputText">Video</div>
+                            <input type="text" #videos="ngModel" name="videos" [(ngModel)]="propiedad.videos" class="input" required />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="inputBox">
+                            <div class="inputText">Galeria</div>
+                            <input type="text" #galeria="ngModel" name="galeria" [(ngModel)]="propiedad.galeria" class="input" id="image" required />
+                            <div class="input-group-append">
+                                <button class="btn btn-outline-secondary" data-toggle="modal" data-target=".bd-example-modal-lg-elegir" data-dismiss="modal" type="button">
+                              Elegir Imagen
+                            </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6">
+                        <div class="inputBox ">
+                            <div class="inputText">equipamiento</div>
+                            <input type="text" #equipamiento="ngModel" name="equipamiento" [(ngModel)]="propiedad.equipamiento" class="input" required />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="inputBox ">
+                            <div class="inputText">Bodega</div>
+                            <input type="text" #bodega="ngModel" name="bodega" [(ngModel)]="propiedad.bodega" class="input" required />
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6">
+                        <div class="inputBox ">
+                            <div class="inputText">Dormitorios</div>
+                            <input type="text" #dormitorios="ngModel" name="dormitorios" [(ngModel)]="propiedad.dormitorios" class="input" required />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="inputBox ">
+                            <div class="inputText">Baños</div>
+                            <input type="text" #banos="ngModel" name="banos" [(ngModel)]="propiedad.banos" class="input" required />
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6">
+                        <div class="inputBox ">
+                            <div class="inputText">Corredor</div>
+                            <input type="text" #corredor="ngModel" name="corredor" [(ngModel)]="propiedad.corredor" class="input" required />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-6" *ngIf="entrega">
+                        <select class="browser-default custom-select" #identrega="ngModel" name="identrega" [(ngModel)]="propiedad.identrega">
+                              <option *ngFor="let i of entrega" value="{{i.Id}}">{{i.Nombre}}</option>
+                          </select>
+                    </div>
+
+                    <div class="col-sm-6">
+                        <div class="inputBox ">
+                            <div class="inputText">Financiamiento</div>
+                            <input type="text" #financiamiento="ngModel" name="financiamiento" [(ngModel)]="propiedad.financiamiento" class="input" required />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="inputBox ">
+                            <div class="inputText">Banco</div>
+                            <input type="text" #banco="ngModel" name="banco" [(ngModel)]="propiedad.banco" class="input" required />
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6">
+                        <div class="inputBox ">
+                            <div class="inputText">Dividendo</div>
+                            <input type="text" #dividendo="ngModel" name="dividendo" [(ngModel)]="propiedad.dividendo" class="input" required />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="inputBox ">
+                            <div class="inputText">Años Plazo</div>
+                            <input type="text" #anosplazo="ngModel" name="anosplazo" [(ngModel)]="propiedad.anosplazo" class="input" required />
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6">
+                        <div class="inputBox ">
+                            <label>Esta publicacion es pagada</label>
+                            <br>
+                            <!-- <input type="text" #ispago="ngModel" name="ispago" [(ngModel)]="propiedad.ispago" class="input" required /> -->
+                            <input class="form-check-input" #ispago="ngModel" name="ispago" [(ngModel)]="propiedad.ispago" type="checkbox">
+                            <label class="form-check-label" for="inlineCheckbox1">Si</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-12">
+                        <input type="submit" name="" class="button" value="{{ titleBoton }}" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+<!--Modal Selector image-->
+<div class="modal fade bd-example-modal-lg-elegir" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Seleccionar imagen</h4>
+                <button type="button" class="close" data-dismiss="modal">
+        &times;
+      </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-3" *ngFor="let i of bancoImg; let b = index">
+                        <div class="custom-control custom-checkbox image-checkbox">
+                            <input type="checkbox" class="custom-control-input" id="ck1a{{ b }}" value="{{ i.Nombre }}" (click)="toggle(i.Nombre)" />
+                            <label class="custom-control-label" for="ck1a{{ b }}">
+              <img
+                src="http://localhost/bd/api-rest/img-uploads/{{
+                  i.Nombre
+                }}"
+                alt="#"
+                class="img-fluid"
+              />
+            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-info" data-dismiss="modal" (click)="select()">
+        Seleccionar
+      </button>
+                <button class="btn btn-info" data-toggle="modal" data-target=".bd-example-modal-lg-image" type="button" data-dismiss="modal">
+        Subir Imagen
+      </button>
+                <button type="button" class="btn btn-info" data-dismiss="modal">
+        Close
+      </button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--End-->
+
+<!--Modal Upload imagen-->
+<div class="modal fade bd-example-modal-lg-image" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Subir imagen</h4>
+                <button type="button" class="close" data-dismiss="modal">
+        &times;
+      </button>
+            </div>
+            <div class="modal-body">
+                <div class="file-loading">
+                    <input id="input-20" type="file" accept="image/*" (change)="fileChangeEvent($event)" />
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-info" data-dismiss="modal" (click)="uploadFileBD()">
+        Subir
+      </button>
+                <button type="button" class="btn btn-info" data-dismiss="modal" data-toggle="modal" data-target=".bd-example-modal-lg">
+        Close
+      </button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--End-->

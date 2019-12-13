@@ -2340,7 +2340,8 @@ CREATE TABLE IF NOT EXISTS `propiedades` (
     mt2construidos varchar(255) NULL,
     idpropiedad varchar(255) NULL,
     modelos varchar(255) NULL,
-    mapaubicacion varchar(255) NULL,
+    lat  varchar(255) NULL,
+    lng  varchar(255) NULL,
     tipoprop int null,
     videos varchar(255) NULL,
     galeria varchar(255) NULL,
@@ -2404,6 +2405,24 @@ vista_banco AS
 SELECT * FROM banco ORDER BY Id DESC;
 --end--
 
+--Formato--
+CREATE VIEW 
+vista_formato AS 
+SELECT * FROM formato;
+--end--
+
+--TipoPropiedad--
+CREATE VIEW 
+vista_tipopropiedad AS 
+SELECT * FROM tipopropiedad;
+--end--
+
+--Tipoentrega--
+CREATE VIEW 
+vista_entrega AS 
+SELECT * FROM entrega;
+--end--
+
 --Tipo--
 CREATE VIEW 
 vista_tipo AS 
@@ -2413,6 +2432,7 @@ SELECT * FROM tipo;
 --end views--
 
 --Stored Procedure--
+
 DELIMITER //
  
 CREATE PROCEDURE get_categoria_noticia(

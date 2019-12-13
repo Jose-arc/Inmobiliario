@@ -138,6 +138,18 @@ export class GlobalsService {
     return this.http.get(this.api_rest + "tipo");
   }
 
+  getTipoPropiedad(): Observable<any>{
+    return this.http.get(this.api_rest + "tipopropiedad");
+  }
+
+  getFormato(): Observable<any>{
+    return this.http.get(this.api_rest + "formato");
+  }
+
+  getEntrega(): Observable<any>{
+    return this.http.get(this.api_rest + "entrega");
+  }
+
   //End Views
 
   

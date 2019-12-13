@@ -15,6 +15,8 @@ import { ListcategorianoticiasComponent } from './pages/listcategorianoticias/li
 import { AddOferenteComponent } from './pages/add-oferente/add-oferente.component';
 import { OferenteUpdateComponent } from './pages/oferente/oferente-update.component';
 import { ListcategoriaoferenteComponent } from './pages/listcategoriaoferente/listcategoriaoferente.component';
+import { AddPropiedadComponent } from './pages/add-propiedad/add-propiedad.component';
+
 // End
 
 //Guard
@@ -64,6 +66,11 @@ const routes: Routes = [
   {
     path: "propiedades",
     component: PropiedadesComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: "add-propiedades",
+    component: AddPropiedadComponent,
     canActivate: [AuthGuard]
   },
   { path: "registro", component: RegistroComponent },
