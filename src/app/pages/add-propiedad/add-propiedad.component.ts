@@ -1,4 +1,4 @@
-import { Component, OnInit, EventEmitter } from '@angular/core';
+import { Component, OnInit, EventEmitter, Query, Input } from '@angular/core';
 
 //Imports
 import { Router } from "@angular/router";
@@ -11,6 +11,7 @@ import { Bancoimg } from "src/app/models/banco.model";
 
 import L from 'leaflet'; 
 import { GeoSearchControl, OpenStreetMapProvider } from 'leaflet-geosearch';
+
 
 @Component({
   selector: 'app-add-propiedad',
@@ -197,7 +198,7 @@ export class AddPropiedadComponent implements OnInit {
   }
 
   getMap(){
-  
+
   // Initialize the map and assign it to a variable for later use
 var map = L.map('map', {
   // Set latitude and longitude of the map center (required)
@@ -217,7 +218,7 @@ L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 const provider = new OpenStreetMapProvider();
 
 new GeoSearchControl({
-  provider: provider,                               // required
+  provider: provider,                                 // required
   showMarker: true,                                   // optional: true|false  - default true
   showPopup: false,                                   // optional: true|false  - default false
   marker: {                                           // optional: L.Marker    - default L.Icon.Default
@@ -228,10 +229,19 @@ new GeoSearchControl({
   maxMarkers: 1,                                      // optional: number      - default 1
   retainZoomLevel: false,                             // optional: true|false  - default false
   animateZoom: true,                                  // optional: true|false  - default true
-  autoClose: false,                                   // optional: true|false  - default false
+  autoClose: true,                                   // optional: true|false  - default false
   searchLabel: 'Ingrese ubicacion',                       // optional: string      - default 'Enter address'
-  keepResult: false                                   // optional: true|false  - default false
+  keepResult: true                                   // optional: true|false  - default false
 }).addTo(map);
+
+//Obtener coordenadas de la busqueda
+map.on('geosearch/showlocation', function(e){
+  let latlng = {lat: Number(e.location.y), lng: Number(e.location.x)}
+  let coordenadas = latlng;
+  console.log(coordenadas);
+});
+
+//fin
 
 $('#locate-position').on('click', function(){
   map.locate({setView: true, maxZoom: 15});
@@ -240,11 +250,12 @@ $('#locate-position').on('click', function(){
 function onLocationFound(e) {
   var radius = e.accuracy / 2;
   L.marker(e.latlng).addTo(map)
-      .on('click', function(){
-        confirm("are you sure?");
-      });
+      // .on('click', function(){
+      //   confirm("are you sure?");
+      // });
       //.bindPopup("You are within " + radius + " meters from this point").openPopup();
   L.circle(e.latlng, radius).addTo(map);
+  console.log("Posicion : " + e.latlng);
 }
 
 map.on('locationfound', onLocationFound);
@@ -255,7 +266,5 @@ function onLocationError(e) {
 map.on('locationerror', onLocationError);
 
   }
-
-
 
 }
