@@ -2429,6 +2429,12 @@ vista_tipo AS
 SELECT * FROM tipo;
 --end--
 
+--Orden Propiedades--
+CREATE VIEW
+vista_ordenprop AS
+SELECT COUNT(*) AS npropiedades FROM propiedades;
+--end--
+
 --end views--
 
 --Stored Procedure--

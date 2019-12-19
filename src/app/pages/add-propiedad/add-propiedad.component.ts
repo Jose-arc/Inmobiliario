@@ -1,4 +1,4 @@
-import { Component, OnInit, EventEmitter, Query, Input } from '@angular/core';
+import { Component, OnInit, EventEmitter} from '@angular/core';
 
 //Imports
 import { Router } from "@angular/router";
@@ -26,6 +26,7 @@ export class AddPropiedadComponent implements OnInit {
   public archivosParaSubir;
   public resultadoSubida;
   public selected = [];
+  public selectedGaleria = [];
   selectedChange: EventEmitter<any> = new EventEmitter();
   public bancoImg: any[];
   //Array de subir imagen al BD
@@ -37,6 +38,11 @@ export class AddPropiedadComponent implements OnInit {
   public formato : any[];
   public entrega : any[];
 
+  //Map
+  a : any;
+
+  orden : any;
+
   //Variables del form
   public idPropiedad = this._ps.makeId();
   public fecha = this._g.fullFecha();
@@ -45,7 +51,7 @@ export class AddPropiedadComponent implements OnInit {
               private _g : GlobalsService,
               private _router: Router) { 
                 
-                this.propiedad = new Propiedad("","81","","","","0","","","","","","","","","0","","","","","","","","0","","","","","",this.fecha,"")
+                this.propiedad = new Propiedad("","81","","","","0","","","","",this._ps.makeId(),"","","","0","","","","","","","","0","","","","","",this.fecha,this.orden)
                 this.titleBoton = "Añadir Propiedad";
               }
 
@@ -55,11 +61,44 @@ export class AddPropiedadComponent implements OnInit {
     this.resultEntrega();
     this.resultFormato();
     this.getMap();
+    this.getNPropiedades();
     
   }
 
   onSubmit(){
-    console.log(this.propiedad);
+
+    let pago;
+    let lat: any;
+    let lng: any ;
+
+    //Condiciones
+    let islatLng = ( this.propiedad.lat == null && this.propiedad.lng == null ) ? 1 : 0;
+    console.log(islatLng);
+
+    if (this.propiedad.lat == null && this.propiedad.lng == null) {
+      
+      this._g.getMessage("Seleccione punto en el mapa", "Warning", "Faltan Campos por llenar");
+
+      lat = "-33.4379";
+      lng = "-70.6504";
+      console.log("-- Map by defect --");
+    }
+
+    if (this.propiedad.ispago) {
+      pago = "1";
+    }else{
+      pago = "0";
+    }
+
+    this.propiedad.lat = (islatLng == 1) ? lat : this.a.latlng.lat.toString();
+    this.propiedad.lng = (islatLng == 1) ? lng : this.a.latlng.lng.toString();
+
+    this.propiedad.ispago = pago;
+
+    this.propiedad.orden = this.orden;
+
+    //console.log(this.propiedad);
+    this.addPropiedad();
   }
 
   fileChangeEvent(fileInput: any) {
@@ -72,6 +111,13 @@ export class AddPropiedadComponent implements OnInit {
     if (index === -1) this.selected.push(value);
     else this.selected.splice(index, 1);
     this.selectedChange.emit(this.selected);
+  }
+
+  toggleGaleria(value) {
+    var index = this.selectedGaleria.indexOf(value);
+    if (index === -1) this.selectedGaleria.push(value);
+    else this.selectedGaleria.splice(index, 1);
+    this.selectedChange.emit(this.selectedGaleria);
   }
 
   uploadFileBD() {
@@ -139,11 +185,17 @@ export class AddPropiedadComponent implements OnInit {
     );
   }
 
-  // select() {
-  //   this.img = this.selected;
+  selectModel() {
+    this.img = this.selected;
 
-  //   this.oferente.image_oferente = this.img.toString();
-  // }
+    this.propiedad.modelos = this.img.toString();
+  }
+
+  selectGaleria() {
+    this.img = this.selectedGaleria;
+
+    this.propiedad.galeria = this.img.toString();
+  }
   
 
   resultTipoPropiedad(){
@@ -197,20 +249,16 @@ export class AddPropiedadComponent implements OnInit {
     )
   }
 
-  getMap(){
 
-  // Initialize the map and assign it to a variable for later use
-var map = L.map('map', {
-  // Set latitude and longitude of the map center (required)
+  getMap():void{
+
+  let map = L.map('map', {
   center: [-33.4379, -70.6504],
-  // Set the initial zoom level, values 0-18, where 0 is most zoomed-out (required)
   zoom: 10
 });
 
 L.control.scale().addTo(map);
 
-// Create a Tile Layer and add it to the map
-//var tiles = new L.tileLayer('http://{s}.tile.stamen.com/watercolor/{z}/{x}/{y}.png').addTo(map);
 L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
   attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
 }).addTo(map);
@@ -234,14 +282,10 @@ new GeoSearchControl({
   keepResult: true                                   // optional: true|false  - default false
 }).addTo(map);
 
-//Obtener coordenadas de la busqueda
-map.on('geosearch/showlocation', function(e){
-  let latlng = {lat: Number(e.location.y), lng: Number(e.location.x)}
-  let coordenadas = latlng;
-  console.log(coordenadas);
-});
 
-//fin
+this.a = map.on('geosearch/showlocation', function(e){
+  this.latlng = {lat: Number(e.location.y), lng: Number(e.location.x)}
+});
 
 $('#locate-position').on('click', function(){
   map.locate({setView: true, maxZoom: 15});
@@ -250,10 +294,6 @@ $('#locate-position').on('click', function(){
 function onLocationFound(e) {
   var radius = e.accuracy / 2;
   L.marker(e.latlng).addTo(map)
-      // .on('click', function(){
-      //   confirm("are you sure?");
-      // });
-      //.bindPopup("You are within " + radius + " meters from this point").openPopup();
   L.circle(e.latlng, radius).addTo(map);
   console.log("Posicion : " + e.latlng);
 }
@@ -266,5 +306,53 @@ function onLocationError(e) {
 map.on('locationerror', onLocationError);
 
   }
+
+  addPropiedad(){
+    this._ps.addPropiedad(this.propiedad).subscribe(
+      result =>{
+        if (result.code == 200) {
+          Swal.close();
+          this._router.navigateByUrl("/propiedades");
+          //this._g.getMessage("Se añadio correctamente","success","Propiedad");
+        }
+        else {
+            this._g.getMessage(result.mensaje,"warning","Error")
+          }
+      },
+      err =>{
+        console.log(err);
+      }
+    )
+  }
+
+  getNPropiedades(): void{
+
+    let n;
+    let b;
+    let c;
+    let numTotal;
+
+    this._ps.getNPropiedades().subscribe(
+      result =>{
+        if (result.code == 200) {
+          
+          n = result.mensaje;
+          b = n[0];
+          c = parseInt(b['npropiedades']);
+          numTotal = c + 1 ;
+          //console.log(numTotal);
+          this.orden = numTotal;
+    
+        } else {
+          console.log(result.mensaje);
+        }
+      },
+      err =>{
+        console.log(err);
+      }
+    )
+
+  }
+  
 
 }

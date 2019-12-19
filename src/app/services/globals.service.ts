@@ -9,6 +9,8 @@ import { Observable, from } from "rxjs";
 import { GLOBAL } from "../models/global";
 import { Bancoimg } from "../models/banco.model";
 
+import Swal from "sweetalert2";
+
 @Injectable({
   providedIn: "root"
 })
@@ -151,6 +153,15 @@ export class GlobalsService {
   }
 
   //End Views
+
+  getMessage(mensaje: any, icono: any, tituloAlerta: string){
+    return Swal.fire({
+      allowOutsideClick: false,
+      icon: icono,
+      title: tituloAlerta,
+      text: mensaje
+    });
+  }
 
   
 }

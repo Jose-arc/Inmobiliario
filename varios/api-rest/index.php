@@ -278,8 +278,12 @@ $app->post('/propiedades',function() use($app,$db){
         $data['modelos'] = null;
     }
 
-    if (!isset($data['mapaubicacion'])) {
-        $data['mapaubicacion'] = null;
+    if (!isset($data['lat'])) {
+        $data['lat'] = null;
+    }
+
+    if (!isset($data['lng'])) {
+        $data['lng'] = null;
     }
 
     if (!isset($data['tipoprop'])) {
@@ -326,34 +330,57 @@ $app->post('/propiedades',function() use($app,$db){
         $data['banco'] = null;
     }
 
-    if (!isset($data['idpropiedad'])) {
-        $data['idpropiedad'] = null;
+    if (!isset($data['dividendo'])) {
+        $data['dividendo'] = null;
     }
 
+    if (!isset($data['anosplazo'])) {
+        $data['anosplazo'] = null;
+    }
+
+    if (!isset($data['ispago'])) {
+        $data['ispago'] = null;
+    }
+
+    if (!isset($data['fecha'])) {
+        $data['fecha'] = null;
+    }
+
+    if (!isset($data['orden'])) {
+        $data['orden'] = null;
+    }
+    
+
     $query = "INSERT INTO propiedades VALUES(NULL,".
-                    "'{$data['nombre']}',".
-                    "'{$data['rut']}',".
-                    "'{$data['direccion']}',".
-                    "'{$data['email']}',".
-                    "'{$data['telefono']}',".
-                    "'{$data['sitioweb']}',".
-                    "'{$data['idtipo']}',".
+                    "'{$data['idpais']}',".
+                    "'{$data['ciudad']}',".
+                    "'{$data['comuna']}',".
+                    "'{$data['calleandnumber']}',".
+                    "'{$data['idformato']}',".
+                    "'{$data['uf']}',".
+                    "'{$data['monedalocal']}',".
+                    "'{$data['mt2totales']}',".
+                    "'{$data['mt2construidos']}',".
                     "'{$data['idpropiedad']}',".
-                    "'{$data['modelo']}',".
-                    "'{$data['mapaubicacion']}',".
+                    "'{$data['modelos']}',".
+                    "'{$data['lat']}',".
+                    "'{$data['lng']}',".
                     "'{$data['tipoprop']}',".
-                    "'{$data['video']}',".
+                    "'{$data['videos']}',".
                     "'{$data['galeria']}',".
                     "'{$data['equipamiento']}',".
                     "'{$data['bodega']}',".
                     "'{$data['dormitorios']}',".
                     "'{$data['banos']}',".
-                    "'{$data['corredo']}',".
+                    "'{$data['corredor']}',".
                     "'{$data['identrega']}',".
                     "'{$data['financiamiento']}',".
                     "'{$data['banco']}',".
                     "'{$data['dividendo']}',".
-                    "'{$data['anosplazo']}');";
+                    "'{$data['anosplazo']}',".
+                    "'{$data['ispago']}',".
+                    "'{$data['fecha']}',".
+                    "{$data['orden']});";
 
     $insert = $db->query($query);
     
@@ -370,7 +397,7 @@ $app->post('/propiedades',function() use($app,$db){
             'mensaje' => 'se añadio'
         );
     }
-
+    //echo $query;
     echo json_encode($result);
 
 });
@@ -1205,6 +1232,40 @@ $app->get('/formato',function() use($app,$db){
 
 });
 //END
+
+//Listar cantidad total de propiedades
+$app->get('/npropiedades',function() use($app,$db){
+
+    $query = "SELECT * FROM vista_ordenprop";
+    $list = $db->query($query);
+
+    $npropiedades = array();
+    while ($i = $list->fetch_assoc()) {
+        $npropiedades[] = $i;
+    }
+
+    if ($npropiedades != null) {
+        
+        $result = array(
+            'status' => 'success',
+            'code' => '200',
+            'mensaje' => $npropiedades
+        );
+
+    }else{
+
+        $result = array(
+            'code' => '404',
+            'status' => 'error',
+            'mensaje' => 'No hay registros'
+        );
+
+    }
+
+
+    echo json_encode($result);
+
+});
 
 //LISTAR TIPO ENTREGA
 $app->get('/entrega',function() use($app,$db){

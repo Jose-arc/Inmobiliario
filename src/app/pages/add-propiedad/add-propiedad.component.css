@@ -120,7 +120,7 @@ textarea {
     position: absolute;
     top: 122px;
     left: 25px;
-    z-index: 10000;
+    z-index: 1000;
     width: 30px;
     text-align: center;
     background: linear-gradient(45deg, lightgreen, green);

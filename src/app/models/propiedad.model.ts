@@ -11,12 +11,12 @@ export class Propiedad {
         public mt2totales : string,
         public mt2construidos : string,
         public idpropiedad : string,
-        public modelos : string,
+        public modelos : string, //img
         public lat : string,
         public lng : string,
         public tipoprop : string,
-        public videos : string,
-        public galeria : string,
+        public videos : string, //link Youtube
+        public galeria : string, //img
         public equipamiento : string,
         public bodega : string,
         public dormitorios : string,
@@ -29,7 +29,7 @@ export class Propiedad {
         public anosplazo : string,
         public ispago : string,
         public fecha : string,
-        public orden : string
+        public orden : number
     ) {}
   }
   

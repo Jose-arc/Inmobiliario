@@ -25,8 +25,12 @@ export class PropiedadesService {
 
    }
 
-   getPropiedad(): Observable<any> {
+  getPropiedad(): Observable<any> {
     return this.http.get(this.api_rest + "propiedades");
+  }
+
+  getNPropiedades(): Observable<any> {
+    return this.http.get(this.api_rest + "npropiedades");
   }
 
   getDetallePropiedad(id) : Observable<any> {

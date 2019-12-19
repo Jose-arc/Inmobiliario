@@ -20,19 +20,19 @@
                 </div>
 
                 <div class="row">
-                    <div class="col-sm-6">
+                    <!-- <div class="col-sm-6">
                         <div class="inputBox">
                             <div class="inputText">Imagen</div>
                             <input type="text" #image_propiedad="ngModel" name="image_propiedad" [(ngModel)]="propiedad.image_propiedad" class="input" id="image" required />
                             <div class="input-group-append">
-                                <button class="btn btn-outline-secondary" data-toggle="modal" data-target=".bd-example-modal-lg-elegir" data-dismiss="modal" type="button">
+                                <button class="btn btn-outline-secondary"  type="button">
                               Elegir Imagen
                             </button>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
 
-                    <div class="col-sm-6">
+                    <div class="col-sm-12">
                         <div class="inputBox">
                             <div class="inputText">Calle y Numero</div>
                             <input type="text" #calleandnumber="ngModel" name="calleandnumber" [(ngModel)]="propiedad.calleandnumber" class="input" required />
@@ -99,6 +99,8 @@
                     </div>
                 </div>
 
+                <br>
+
                 <div class="row">
                     <div class="col-sm-6" *ngIf="tipopropiedad">
                         <select class="browser-default custom-select" #tipoprop="ngModel" name="tipoprop" [(ngModel)]="propiedad.tipoprop">
@@ -121,7 +123,7 @@
                             <div class="inputText">Galeria</div>
                             <input type="text" #galeria="ngModel" name="galeria" [(ngModel)]="propiedad.galeria" class="input" id="image" required />
                             <div class="input-group-append">
-                                <button class="btn btn-outline-secondary" data-toggle="modal" data-target=".bd-example-modal-lg-elegir" data-dismiss="modal" type="button">
+                                <button class="btn btn-outline-secondary" data-toggle="modal" data-target=".bd-example-modal-lg-galeria" data-dismiss="modal" type="button">
                               Elegir Imagen
                             </button>
                             </div>
@@ -228,7 +230,7 @@
     </div>
 </form>
 
-<!--Modal Selector image-->
+<!--Modal Selector image Modelos-->
 <div class="modal fade bd-example-modal-lg-elegir" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
@@ -257,7 +259,51 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-info" data-dismiss="modal" (click)="select()">
+                <button type="button" class="btn btn-info" data-dismiss="modal" (click)="selectModel()">
+        Seleccionar
+      </button>
+                <button class="btn btn-info" data-toggle="modal" data-target=".bd-example-modal-lg-image" type="button" data-dismiss="modal">
+        Subir Imagen
+      </button>
+                <button type="button" class="btn btn-info" data-dismiss="modal">
+        Close
+      </button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--End-->
+
+<!--Modal Selector image Galeria-->
+<div class="modal fade bd-example-modal-lg-galeria" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Seleccionar imagen</h4>
+                <button type="button" class="close" data-dismiss="modal">
+        &times;
+      </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-3" *ngFor="let i of bancoImg; let c = index">
+                        <div class="custom-control custom-checkbox image-checkbox">
+                            <input type="checkbox" class="custom-control-input" id="ck1b{{ c }}" value="{{ i.Nombre }}" (click)="toggleGaleria(i.Nombre)" />
+                            <label class="custom-control-label" for="ck1b{{ c }}">
+              <img
+                src="http://localhost/bd/api-rest/img-uploads/{{
+                  i.Nombre
+                }}"
+                alt="#"
+                class="img-fluid"
+              />
+            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-info" data-dismiss="modal" (click)="selectGaleria()">
         Seleccionar
       </button>
                 <button class="btn btn-info" data-toggle="modal" data-target=".bd-example-modal-lg-image" type="button" data-dismiss="modal">
