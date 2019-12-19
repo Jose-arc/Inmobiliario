@@ -21,13 +21,14 @@ import { ListcategorianoticiasComponent } from './pages/listcategorianoticias/li
 import { AddOferenteComponent } from './pages/add-oferente/add-oferente.component';
 import { ListcategoriaoferenteComponent } from './pages/listcategoriaoferente/listcategoriaoferente.component';
 import { OferenteUpdateComponent } from './pages/oferente/oferente-update.component';
+import { AddPropiedadComponent } from './pages/add-propiedad/add-propiedad.component';
+import { PropiedadUpdateComponent } from './pages/propiedades/propiedades-update.component';
 
 //End
 
 //Pipes
 import { FirstimgPipe } from "./pipes/firstimg.pipe";
 import { AcortadorTextPipe } from './pipes/acortador-text.pipe';
-import { AddPropiedadComponent } from './pages/add-propiedad/add-propiedad.component';
 //end
 
 @NgModule({
@@ -48,7 +49,8 @@ import { AddPropiedadComponent } from './pages/add-propiedad/add-propiedad.compo
     AddOferenteComponent,
     ListcategoriaoferenteComponent,
     OferenteUpdateComponent,
-    AddPropiedadComponent
+    AddPropiedadComponent,
+    PropiedadUpdateComponent
   ],
   imports: [BrowserModule, FormsModule, HttpClientModule, AppRoutingModule],
   providers: [],
