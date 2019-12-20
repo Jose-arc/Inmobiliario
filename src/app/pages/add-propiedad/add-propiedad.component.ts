@@ -121,11 +121,7 @@ export class AddPropiedadComponent implements OnInit {
   }
 
   uploadFileBD() {
-    Swal.fire({
-      allowOutsideClick: false,
-      icon: "info",
-      text: "Espere por favor"
-    });
+    this._g.getMessage("Espere por favor","info","");
     Swal.showLoading();
 
     if (this.archivosParaSubir && this.archivosParaSubir.length >= 1) {
@@ -143,12 +139,7 @@ export class AddPropiedadComponent implements OnInit {
             Swal.close();
           },
           error => {
-            Swal.fire({
-              allowOutsideClick: false,
-              icon: "error",
-              title: "Error",
-              text: error
-            });
+            this._g.getMessage(error,"error","Error");
           }
         );
     }
@@ -292,10 +283,10 @@ $('#locate-position').on('click', function(){
 });
 
 function onLocationFound(e) {
-  var radius = e.accuracy / 2;
-  L.marker(e.latlng).addTo(map)
-  L.circle(e.latlng, radius).addTo(map);
-  console.log("Posicion : " + e.latlng);
+  // var radius = e.accuracy / 2;
+  // L.marker(e.latlng).addTo(map)
+  // L.circle(e.latlng, radius).addTo(map);
+  // console.log("Posicion : " + e.latlng);
 }
 
 map.on('locationfound', onLocationFound);

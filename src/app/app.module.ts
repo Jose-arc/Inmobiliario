@@ -29,6 +29,7 @@ import { PropiedadUpdateComponent } from './pages/propiedades/propiedades-update
 //Pipes
 import { FirstimgPipe } from "./pipes/firstimg.pipe";
 import { AcortadorTextPipe } from './pipes/acortador-text.pipe';
+import { PropiedadDetailComponent } from './pages/propiedad-detail/propiedad-detail.component';
 //end
 
 @NgModule({
@@ -50,7 +51,8 @@ import { AcortadorTextPipe } from './pipes/acortador-text.pipe';
     ListcategoriaoferenteComponent,
     OferenteUpdateComponent,
     AddPropiedadComponent,
-    PropiedadUpdateComponent
+    PropiedadUpdateComponent,
+    PropiedadDetailComponent
   ],
   imports: [BrowserModule, FormsModule, HttpClientModule, AppRoutingModule],
   providers: [],

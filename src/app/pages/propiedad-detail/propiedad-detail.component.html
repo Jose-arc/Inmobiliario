@@ -1,0 +1,162 @@
+<section class="container-fluid wrapper-padding pt-5">
+    <div class="" style="margin-top: 30px;">
+        <div class="row my-5">
+            <div class="col-md-5">
+                <div id="gallery" class="simplegallery">
+                    <div class="content">
+                        <img src="http://placehold.it/700x400" class="image_1" alt="" />
+                        <img src="http://placehold.it/700x400" class="image_2" style="display:none" alt="" />
+                        <img src="http://placehold.it/700x400" class="image_3" style="display:none" alt="" />
+                    </div>
+
+                    <div class="clear"></div>
+
+                    <div class="thumbnail">
+                        <div class="thumb">
+                            <a href="#" rel="1">
+                                <img src="images/productos/image-1.jpg" id="thumb_1" alt="" />
+                            </a>
+                        </div>
+                        <div class="thumb">
+                            <a href="#" rel="2">
+                                <img src="images/productos/image-2.jpg" id="thumb_2" alt="" />
+                            </a>
+                        </div>
+                        <div class="thumb">
+                            <a href="#" rel="3">
+                                <img src="images/productos/image-3.jpg" id="thumb_3" alt="" />
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-7">
+                <!--div class="social-media-info">
+                      <ul>
+                          <li><a href="" class="facebook"><i class="fab fa-facebook-f"></i></a></li>
+                          <li><a href="" class="twitter"><i class="fab fa-twitter"></i></a></li>
+                          <li><a href="" class="pinterest"><i class="fab fa-pinterest"></i></a></li>
+                          <li><a href="" class="whatsapp"><i class="fab fa-whatsapp"></i></a></li>
+                      </ul>
+                  </div-->
+                <div class="product-info">
+                    <article>
+                        <dl>{{propiedad_detail.comuna}}</dl>
+                    </article>
+                    <h3>{{propiedad_detail.calleandnumber}}</h3>
+                    <span class="tag-precio">
+                          <span class="precio-simbolo">UF</span>
+                    <span class="precio-numero">{{propiedad_detail.uf}}</span>
+                    </span>
+
+                    <div class="tabs">
+                        <input type="radio" name="tabs" id="tabone" checked="checked">
+                        <label for="tabone">Descripción</label>
+                        <div class="tab contenido-tab">
+                            <div class="tablas">
+                                <div class="tablagen">
+                                    <div class="fila">
+                                        <div class="col"><i class="fas fa-bed"></i> Habitaciones</div>
+                                        <div class="col">{{propiedad_detail.dormitorios}}</div>
+                                    </div>
+                                    <div class="fila">
+                                        <div class="col"><i class="fas fa-bath"></i> Baños</div>
+                                        <div class="col">{{propiedad_detail.banos}}</div>
+                                    </div>
+                                    <div class="fila">
+                                        <div class="col"><i class="fas fa-building"></i> Metros cuadrados</div>
+                                        <div class="col">{{propiedad_detail.mt2totales}}mt2</div>
+                                    </div>
+                                    <div class="fila">
+                                        <div class="col"><i class="fas fa-parking"></i> Acceso a estacionamiento</div>
+                                        <div class="col">2 estacionamiento</div>
+                                    </div>
+                                    <div class="fila">
+                                        <div class="col"><i class="fas fa-boxes"></i> Bodega</div>
+                                        <div class="col">1 bodega</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <input type="radio" name="tabs" id="tabtwo">
+                        <label for="tabtwo">Interiores</label>
+                        <div class="tab contenido-tab">
+                            <div class="row">
+                                <div class="col-6">
+                                    <img src="images/interiores/int-1.jpg" style="max-width:100%;cursor:pointer" onclick="onClick(this)" class="modal-hover-opacity">
+                                </div>
+                                <div class="col-6">
+                                    <img src="images/interiores/int-2.png" style="max-width:100%;cursor:pointer" onclick="onClick(this)" class="modal-hover-opacity">
+                                </div>
+                            </div>
+                        </div>
+                        <input type="radio" name="tabs" id="tabthree">
+                        <label for="tabthree">videos</label>
+                        <div class="tab contenido-tab">
+                            <iframe width="560" height="315" [src]="getVideoIframe(propiedad_detail.videos)" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        </div>
+                        <input type="radio" name="tabs" id="tabfour">
+                        <label for="tabfour">Servicios cercanos</label>
+                        <div class="tab contenido-tab">
+                            <div class="lugares">
+                                <button class="tablinks active" onclick="openCity(event, 'supermercados')">Supermercados</button>
+                                <button class="tablinks" onclick="openCity(event, 'metro')">Metro</button>
+                                <button class="tablinks" onclick="openCity(event, 'farmacias')">Farmacias</button>
+                            </div>
+                            <div class="tab-de-contenidos">
+                                <div id="supermercados" class="tabcontent">
+                                    <h3>Servicios</h3>
+                                    <span>Santa Isabel</span>
+                                    <ul>
+                                        <li>Esquina Condell con Bilbao</li>
+                                    </ul>
+
+                                </div>
+
+                                <div id="metro" class="tabcontent">
+                                    <h3>Metro</h3>
+                                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever</p>
+                                </div>
+
+                                <div id="farmacias" class="tabcontent">
+                                    <h3>Farmacias</h3>
+                                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever</p>
+                                </div>
+                            </div>
+                        </div>
+                        <input type="radio" name="tabs" id="tabfive">
+                        <label for="tabfive">Mapa</label>
+                        <div class="tab contenido-tab">
+                            <div id="map"></div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-12 textoinformacion py-5">
+                <span>Descripción de la propiedad</span>
+                <p>Lorem Ipsum è un testo segnaposto utilizzato nel settore della tipografia e della stampa. Lorem Ipsum è considerato il testo segnaposto standard sin dal sedicesimo secolo, quando un anonimo tipografo prese una cassetta di caratteri e li
+                    assemblò per preparare un testo campione. È sopravvissuto non solo a più di cinque secoli, ma anche al passaggio alla videoimpaginazione, pervenendoci sostanzialmente inalterato. Fu reso popolare, negli anni ’60, con la diffusione
+                    dei fogli di caratteri trasferibili “Letraset”, che contenevano passaggi del Lorem Ipsum, e più recentemente da software di impaginazione come Aldus PageMaker, che includeva versioni del Lorem Ipsum.</p>
+            </div>
+        </div>
+    </div>
+</section>
+<div id="modal01" class="modal" onclick="this.style.display='none'">
+    <span class="close">&times;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+    <div class="modal-contenido">
+        <img id="img01" style="max-width:100%">
+    </div>
+</div>
+
+<section>
+    <div class="map">
+        <div class="col-12 text-center">
+            <h3>Ubicación de la Propiedad</h3>
+        </div>
+        <div>
+            <div id="mapCenter"></div>
+        </div>
+    </div>
+</section>

@@ -17,7 +17,7 @@ import { OferenteUpdateComponent } from './pages/oferente/oferente-update.compon
 import { ListcategoriaoferenteComponent } from './pages/listcategoriaoferente/listcategoriaoferente.component';
 import { AddPropiedadComponent } from './pages/add-propiedad/add-propiedad.component';
 import { PropiedadUpdateComponent } from './pages/propiedades/propiedades-update.component';
-
+import { PropiedadDetailComponent } from './pages/propiedad-detail/propiedad-detail.component';
 // End
 
 //Guard
@@ -77,6 +77,11 @@ const routes: Routes = [
   {
     path: "propiedad-update/:id",
     component: PropiedadUpdateComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: "propiedad/:id",
+    component: PropiedadDetailComponent,
     canActivate: [AuthGuard]
   },
   { path: "registro", component: RegistroComponent },

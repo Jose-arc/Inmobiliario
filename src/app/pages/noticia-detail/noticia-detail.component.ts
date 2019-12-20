@@ -3,11 +3,10 @@ import { Component, OnInit } from "@angular/core";
 // Imports
 import { Router, ActivatedRoute, Params } from "@angular/router";
 import { NoticiasService } from "src/app/services/noticias.service";
-import { Noticias } from "src/app/models/noticias.model";
+
 import { GlobalsService } from "src/app/services/globals.service";
 import Swal from "sweetalert2";
-import { GLOBAL } from "src/app/models/global";
-import { Bancoimg } from "src/app/models/banco.model";
+
 
 @Component({
   selector: "app-noticia-detail",
@@ -15,6 +14,7 @@ import { Bancoimg } from "src/app/models/banco.model";
   styleUrls: ["./noticia-detail.component.css"]
 })
 export class NoticiaDetailComponent implements OnInit {
+  
   public noticia_detail: any[];
   public imgs: any[];
   public categorias : any[];
@@ -33,13 +33,7 @@ export class NoticiaDetailComponent implements OnInit {
 
   getDetail() {
 
-    Swal.fire({
-      
-      allowOutsideClick: false,
-      icon: 'info',
-      text: 'Espere por favor'
-
-    });
+    this._g.getMessage("Espere por favor","info","");
     Swal.showLoading();
 
     this._route.params.forEach((params: Params) => {
