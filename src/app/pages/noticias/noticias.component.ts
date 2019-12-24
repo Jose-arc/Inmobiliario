@@ -35,30 +35,19 @@ export class NoticiasComponent implements OnInit {
 
   getNoticias() {
 
-    Swal.fire({
-      
-      allowOutsideClick: false,
-      icon: 'info',
-      text: 'Espere por favor'
-
-    });
+    this._g.getMessage("Espere por favor","info","");
     Swal.showLoading();
 
     this._ns.getNoticias().subscribe(result => {
       if (result.code != 200) {
-        //console.log(result);
-        Swal.fire({
-      
-          allowOutsideClick: false,
-          icon: 'warning',
-          title: 'Categoria Noticias',
-          text: result.mensaje
-    
-        });
+
+        this._g.getMessage(result.mensaje,"warning","Categoria Noticias");
+
       } else {
+
         this.noticias = result.mensaje;
         Swal.close();
-        //console.log(result.mensaje);
+        
       }
     });
   }
