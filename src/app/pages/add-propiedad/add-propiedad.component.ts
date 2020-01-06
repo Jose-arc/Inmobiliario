@@ -12,6 +12,9 @@ import { Bancoimg } from "src/app/models/banco.model";
 import L from 'leaflet'; 
 import { GeoSearchControl, OpenStreetMapProvider } from 'leaflet-geosearch';
 
+//Resize IMG
+// import { Ng2ImgMaxService } from 'ng2-img-max';
+
 
 @Component({
   selector: 'app-add-propiedad',
@@ -49,9 +52,11 @@ export class AddPropiedadComponent implements OnInit {
 
   constructor(private _ps : PropiedadesService,
               private _g : GlobalsService,
-              private _router: Router) { 
+              private _router: Router,
+              /*private ng2ImgMax: Ng2ImgMaxService*/) { 
                 
                 this.propiedad = new Propiedad("","81","","","","0","","","","",this._ps.makeId(),"","","","0","","","","","","","","0","","","","","",this.fecha,this.orden)
+                this.banco = new Bancoimg("", "");
                 this.titleBoton = "Añadir Propiedad";
               }
 
@@ -102,6 +107,17 @@ export class AddPropiedadComponent implements OnInit {
   }
 
   fileChangeEvent(fileInput: any) {
+    // let img = fileInput.target.files[0];
+    // this.ng2ImgMax.resizeImage(img, 400, 400).subscribe(
+    //   result =>{
+    //     this.archivosParaSubir = result;
+    //     console.log(this.archivosParaSubir);
+    //   },
+    //   err =>{
+    //     this._g.getMessage(err,"error","Error en la subida");
+    //   }
+    // );
+
     this.archivosParaSubir = <Array<File>>fileInput.target.files;
     console.log(this.archivosParaSubir);
   }
@@ -126,12 +142,12 @@ export class AddPropiedadComponent implements OnInit {
 
     if (this.archivosParaSubir && this.archivosParaSubir.length >= 1) {
       this._g
-        .subirArchivo(GLOBAL.api_rest + "upload", [], this.archivosParaSubir)
+        .subirArchivo(GLOBAL.dev + "upload", [], this.archivosParaSubir)
         .then(
           result => {
             //console.log(result);
             this.resultadoSubida = result;
-            console.log(this.resultadoSubida);
+            //console.log(this.resultadoSubida);
             this.banco.nombre = this.resultadoSubida.nomimagen;
 
             this.guardarImg();

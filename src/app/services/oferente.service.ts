@@ -15,28 +15,28 @@ import { Oferente } from '../models/oferente.model';
   providedIn: 'root'
 })
 export class OferenteService {
-  public api_rest: string;
-  public api_rest_full: string;
+  public api: string;
+  //public prod_full: string;
 
   constructor( public http: HttpClient ) { 
 
-    this.api_rest = GLOBAL.api_rest;
+    this.api = GLOBAL.dev;
   }
 
   getOferente(): Observable<any> {
-    return this.http.get(this.api_rest + "oferente");
+    return this.http.get(this.api + "oferente");
   }
 
   getDetalleOferente(id) : Observable<any> {
-    return this.http.get(this.api_rest + "oferente/" + id);
+    return this.http.get(this.api + "oferente/" + id);
   }
 
   getListCategoriaOferente(id) : Observable<any> {
-    return this.http.get(this.api_rest + "categoriaoferente/" +id);
+    return this.http.get(this.api + "categoriaoferente/" +id);
   }
 
   deleteOferente(id) : Observable<any> {
-    return this.http.get(this.api_rest + "oferente-delete/"+ id);
+    return this.http.get(this.api + "oferente-delete/"+ id);
   }
 
   addOferente(oferente: Oferente): Observable<any> {
@@ -47,7 +47,7 @@ export class OferenteService {
       "application/x-www-form-urlencoded"
     );
 
-    return this.http.post(this.api_rest + "oferente", params, {
+    return this.http.post(this.api + "oferente", params, {
       headers: headers
     });
   }
@@ -59,7 +59,7 @@ export class OferenteService {
       "Content-Type",
       "application/x-www-form-urlencoded"
     );
-    return this.http.post(this.api_rest + "oferente-update/" + id, params, {
+    return this.http.post(this.api + "oferente-update/" + id, params, {
       headers: headers
     });
   }

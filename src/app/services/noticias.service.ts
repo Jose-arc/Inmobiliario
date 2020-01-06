@@ -15,27 +15,27 @@ import { Noticias } from "../models/noticias.model";
   providedIn: "root"
 })
 export class NoticiasService {
-  public api_rest: string;
-  public api_rest_full: string;
+  public api: string;
+  //public prod_full: string;
 
   constructor(public http: HttpClient) {
-    this.api_rest = GLOBAL.api_rest;
+    this.api = GLOBAL.dev;
   }
 
   getNoticias(): Observable<any> {
-    return this.http.get(this.api_rest + "noticias");
+    return this.http.get(this.api + "noticias");
   }
 
   getDetalleNoticia(id): Observable<any> {
-    return this.http.get(this.api_rest + "noticias/" + id);
+    return this.http.get(this.api + "noticias/" + id);
   }
 
   getListCategoriaNoticia(id): Observable<any> {
-    return this.http.get(this.api_rest + "categorianoticia/" + id);
+    return this.http.get(this.api + "categorianoticia/" + id);
   }
 
   deleteNoticia(id): Observable<any> {
-    return this.http.get(this.api_rest + "noticias-delete/" + id);
+    return this.http.get(this.api + "noticias-delete/" + id);
   }
 
   addNoticias(noticias: Noticias): Observable<any> {
@@ -46,7 +46,7 @@ export class NoticiasService {
       "application/x-www-form-urlencoded"
     );
 
-    return this.http.post(this.api_rest + "noticias", params, {
+    return this.http.post(this.api + "noticias", params, {
       headers: headers
     });
   }
@@ -58,7 +58,7 @@ export class NoticiasService {
       "Content-Type",
       "application/x-www-form-urlencoded"
     );
-    return this.http.post(this.api_rest + "noticias-update/" + id, params, {
+    return this.http.post(this.api + "noticias-update/" + id, params, {
       headers: headers
     });
   }

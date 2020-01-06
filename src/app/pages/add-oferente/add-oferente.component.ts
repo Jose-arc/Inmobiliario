@@ -78,7 +78,7 @@ export class AddOferenteComponent implements OnInit {
 
     if (this.archivosParaSubir && this.archivosParaSubir.length >= 1) {
       this._g
-        .subirArchivo(GLOBAL.api_rest + "upload", [], this.archivosParaSubir)
+        .subirArchivo(GLOBAL.dev + "upload", [], this.archivosParaSubir)
         .then(
           result => {
             //console.log(result);

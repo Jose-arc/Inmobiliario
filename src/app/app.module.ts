@@ -32,6 +32,12 @@ import { AcortadorTextPipe } from './pipes/acortador-text.pipe';
 import { PropiedadDetailComponent } from './pages/propiedad-detail/propiedad-detail.component';
 //end
 
+//Resize IMG
+import { Ng2ImgMaxModule } from 'ng2-img-max';
+
+//Google Adsense para bloques de anuncios
+import { AdsenseModule } from 'ng2-adsense';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -54,7 +60,15 @@ import { PropiedadDetailComponent } from './pages/propiedad-detail/propiedad-det
     PropiedadUpdateComponent,
     PropiedadDetailComponent
   ],
-  imports: [BrowserModule, FormsModule, HttpClientModule, AppRoutingModule],
+  imports: [BrowserModule, 
+            FormsModule, 
+            HttpClientModule, 
+            AppRoutingModule,
+            Ng2ImgMaxModule,
+            AdsenseModule.forRoot({
+              adClient: 'ca-pub-5508568210841212',
+              adSlot: 2459665283,
+            })],
   providers: [],
   bootstrap: [AppComponent]
 })

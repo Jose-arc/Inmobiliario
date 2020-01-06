@@ -15,11 +15,11 @@ import Swal from "sweetalert2";
   providedIn: "root"
 })
 export class GlobalsService {
-  public api_rest: string;
-  public api_rest_full: string;
+  public api: string;
+  //public prod_full: string;
 
   constructor(public http: HttpClient) {
-    this.api_rest = GLOBAL.api_rest;
+    this.api = GLOBAL.dev;
   }
 
   getFecha() {
@@ -97,17 +97,17 @@ export class GlobalsService {
       "application/x-www-form-urlencoded"
     );
 
-    return this.http.post(this.api_rest + "banco", params, {
+    return this.http.post(this.api + "banco", params, {
       headers: headers
     });
   }
 
   getBanco(): Observable<any> {
-    return this.http.get(this.api_rest + "banco");
+    return this.http.get(this.api + "banco");
   }
 
   getBancoDetalle(id): Observable<any> {
-    return this.http.get(this.api_rest + "banco/" + id);
+    return this.http.get(this.api + "banco/" + id);
   }
 
   separadorImagenes(s) {
@@ -137,19 +137,19 @@ export class GlobalsService {
   //Views
 
   getTipo(): Observable<any> {
-    return this.http.get(this.api_rest + "tipo");
+    return this.http.get(this.api + "tipo");
   }
 
   getTipoPropiedad(): Observable<any>{
-    return this.http.get(this.api_rest + "tipopropiedad");
+    return this.http.get(this.api + "tipopropiedad");
   }
 
   getFormato(): Observable<any>{
-    return this.http.get(this.api_rest + "formato");
+    return this.http.get(this.api + "formato");
   }
 
   getEntrega(): Observable<any>{
-    return this.http.get(this.api_rest + "entrega");
+    return this.http.get(this.api + "entrega");
   }
 
   //End Views

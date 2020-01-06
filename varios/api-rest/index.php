@@ -490,7 +490,7 @@ $app->get('/propiedades',function() use($app,$db){
 
 });
 
-//UPDATE OFERENTE
+//UPDATE PROPIEDADES
 $app->post('/propiedades-update/:id',function($id) use($app,$db){
 
     $json = $app->request->post('propiedades');
@@ -507,17 +507,23 @@ $app->post('/propiedades-update/:id',function($id) use($app,$db){
             "mt2totales = '{$data['mt2totales']}', ".
             "mt2construidos = '{$data['mt2construidos']}', ".
             "modelos = '{$data['modelos']}', ".
-            "mapaubicacion = '{$data['mapaubicacion']}', ".
+            "lat = '{$data['lat']}', ".
+            "lng = '{$data['lng']}', ".
             "tipoprop = '{$data['tipoprop']}', ".
             "videos = '{$data['videos']}', ".
             "galeria = '{$data['galeria']}', ".
             "equipamiento = '{$data['equipamiento']}', ".
             "bodega = '{$data['bodega']}', ".
+            "dormitorios = '{$data['dormitorios']}', ".
+            "banos = '{$data['banos']}', ".
             "corredor = '{$data['corredor']}', ".
             "identrega = '{$data['identrega']}', ".
             "financiamiento = '{$data['financiamiento']}', ".
             "banco = '{$data['banco']}', ".
             "dividendo = '{$data['dividendo']}', ".
+            "anosplazo = '{$data['anosplazo']}', ".
+            "ispago = '{$data['ispago']}', ".
+            "fecha = '{$data['fecha']}', ".
             "anosplazo = '{$data['anosplazo']}'  ".
             "WHERE id = {$id} ";
             
@@ -528,7 +534,7 @@ $app->post('/propiedades-update/:id',function($id) use($app,$db){
     if ($list) {
         
         $result = array(
-            'code' => '202',
+            'code' => '200',
             'status' => 'success',
             'mensaje' => 'se modifico correctamente'
         );

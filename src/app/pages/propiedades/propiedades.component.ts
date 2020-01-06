@@ -6,13 +6,13 @@ import { Propiedad } from "src/app/models/propiedad.model";
 import { GlobalsService } from "src/app/services/globals.service";
 import Swal from "sweetalert2";
 import { GLOBAL } from "src/app/models/global";
-import { Bancoimg } from "src/app/models/banco.model";
+// import { Bancoimg } from "src/app/models/banco.model";
 
-import L from 'leaflet'; 
-import { GeoSearchControl, OpenStreetMapProvider } from 'leaflet-geosearch';
+// import L from 'leaflet'; 
+// import { GeoSearchControl, OpenStreetMapProvider } from 'leaflet-geosearch';
 
-import { map, filter } from 'rxjs/operators';
-import { pipe, of } from 'rxjs';
+// import { map, filter } from 'rxjs/operators';
+// import { pipe, of } from 'rxjs';
 
 @Component({
   selector: 'app-propiedades',
@@ -143,13 +143,29 @@ export class PropiedadesComponent implements OnInit {
     let isTipoEntr = this.tipoentr;
     let isComuna = this.comuna;
 
-    let query1 = this.p.filter(propiedad => propiedad.tipoprop === isTipoProp);
-    let query2 = this.p.filter(propiedad => propiedad.tipoform === isTipoform);
-    let query3 = this.p.filter(propiedad => propiedad.tipoentr === isTipoEntr);
-    let query4 = this.p.filter(propiedad => propiedad.comuna === isComuna);
+    // let query1 = this.p.filter(propiedad => propiedad.tipoprop === isTipoProp);
+    // let query2 = this.p.filter(propiedad => propiedad.tipoform === isTipoform);
+    // let query3 = this.p.filter(propiedad => propiedad.tipoentr === isTipoEntr);
+    // let query4 = this.p.filter(propiedad => propiedad.comuna === isComuna);
 
-    this._g.getMessage(query4,"warning","Resultado query");
-   
+    // this._g.getMessage(query4,"warning","Resultado query");
+
+    let data = {
+            // prop : isTipoProp,
+            // form : isTipoform,
+            // entr : isTipoEntr,
+            comuna : isComuna
+          }
+
+          this._ps.getFilter(data).subscribe(
+            result =>{
+              console.log(result);
+            },
+            err =>{
+              console.log(err);
+            }
+          )
+  //  console.log(data);
   }
 
 

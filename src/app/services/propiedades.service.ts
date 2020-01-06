@@ -16,33 +16,29 @@ import { Propiedad } from './../models/propiedad.model';
 })
 export class PropiedadesService {
   
-  public api_rest: string;
-  public api_rest_full: string;
+  public api: string;
+  //public prod_full: string;
 
   constructor( public http: HttpClient ) {
 
-    this.api_rest = GLOBAL.api_rest;
+    this.api = GLOBAL.dev;
 
    }
 
   getPropiedad(): Observable<any> {
-    return this.http.get(this.api_rest + "propiedades");
+    return this.http.get(this.api + "propiedades");
   }
 
   getNPropiedades(): Observable<any> {
-    return this.http.get(this.api_rest + "npropiedades");
+    return this.http.get(this.api + "npropiedades");
   }
 
   getDetallePropiedad(id) : Observable<any> {
-    return this.http.get(this.api_rest + "propiedades/" + id);
+    return this.http.get(this.api + "propiedades/" + id);
   }
 
-  // getListCategoriaOferente(id) : Observable<any> {
-  //   return this.http.get(this.api_rest + "categoriaoferente/" +id);
-  // }
-
   deletePropiedad(id) : Observable<any> {
-    return this.http.get(this.api_rest + "propiedades-delete/"+ id);
+    return this.http.get(this.api + "propiedades-delete/"+ id);
   }
 
   addPropiedad(propiedad: Propiedad): Observable<any> {
@@ -53,7 +49,7 @@ export class PropiedadesService {
       "application/x-www-form-urlencoded"
     );
 
-    return this.http.post(this.api_rest + "propiedades", params, {
+    return this.http.post(this.api + "propiedades", params, {
       headers: headers
     });
   }
@@ -65,9 +61,21 @@ export class PropiedadesService {
       "Content-Type",
       "application/x-www-form-urlencoded"
     );
-    return this.http.post(this.api_rest + "propiedades-update/" + id, params, {
+    return this.http.post(this.api + "propiedades-update/" + id, params, {
       headers: headers
     });
+  }
+
+  getPropiedadIsPago(): Observable<any> {
+    return this.http.get(this.api + "propiedadespago");
+  }
+
+  getPropiedadNoPago(): Observable<any> {
+    return this.http.get(this.api + "propiedadesnopago");
+  }
+
+  getFilter(data) : Observable<any>{
+    return this.http.get(this.api + "filtro", {params: data});
   }
 
   makeId() {

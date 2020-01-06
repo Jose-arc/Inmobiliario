@@ -2354,7 +2354,7 @@ CREATE TABLE IF NOT EXISTS `propiedades` (
     financiamiento varchar(255) NULL,
     banco varchar(255) NULL,
     dividendo varchar(255) NULL,
-    anosPlazo varchar(255) NULL,
+    anosplazo varchar(255) NULL,
     ispago int NULL,
     fecha varchar(255) NULL,
     orden int NULL,
@@ -2433,6 +2433,20 @@ SELECT * FROM tipo;
 CREATE VIEW
 vista_ordenprop AS
 SELECT COUNT(*) AS npropiedades FROM propiedades;
+--end--
+
+--IsPago Prop--
+CREATE VIEW 
+vista_ispagoprop AS
+SELECT * FROM propiedades
+WHERE ispago = '1'
+--end--
+
+--IsPago NULL Prop--
+CREATE VIEW 
+vista_ispagonullprop AS
+SELECT * FROM propiedades
+WHERE ispago like ''
 --end--
 
 --end views--
