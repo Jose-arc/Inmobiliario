@@ -1,82 +1,75 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { UsuarioModel } from '../models/usuario.model';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { GLOBAL } from '../models/global';
+// import { GlobalsService } from 'src/app/services/globals.service';
 
+// import { Observable } from "rxjs";
 import { map } from 'rxjs/operators';
+import { Usuario } from '../models/usuario.model';
+import { Observable } from 'rxjs';
+
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  private url = 'https://www.googleapis.com/identitytoolkit/v3/relyingparty';
-
-  private apikey = 'AIzaSyDMgH4hx1atxnDjsBikJmLSFC1tKsOpWY0';
-
+  public api : string;
   userToken: string;
 
-   // Crear nuevo usuario
-  // https://www.googleapis.com/identitytoolkit/v3/relyingparty/signupNewUser?key=[API_KEY]
-
-
-  // Login
-  // https://www.googleapis.com/identitytoolkit/v3/relyingparty/verifyPassword?key=[API_KEY]
-
   constructor( private http: HttpClient) {
-
+    this.api = GLOBAL.dev;
     this.leerToken();
-
    }
 
-  logout(){ 
-    localStorage.removeItem('token');
-  }
 
-  login( usuario: UsuarioModel ){ 
+  login(data){
+    return this.http.get(this.api + "login", {params: data}).pipe( 
+      map(resp =>{
 
-    const authData = {
-      
-      email: usuario.email,
-      password: usuario.password,
-      returnSecureToken: true
-
-    };
-
-    return this.http.post(
-      `${ this.url }/verifyPassword?key=${ this.apikey }`,
-      authData
-    ).pipe(
-      map( resp =>{
-        this.guardarToken( resp['idToken'] );
         return resp;
+      },
+      err =>{
+        console.log(err);
       })
     );
-
   }
 
-  nuevoUsuario( usuario:UsuarioModel ){
+  setAccount(object : any){
 
-    const authData = {
-      
-      email: usuario.email,
-      password: usuario.password,
-      returnSecureToken: true
+    let data = {
+      "favoritos" : object['favoritos'],
+      "permiso": object['permiso'],
+      "verificacion": object['verificacion'],
+      "name": object['name'],
+      "correo": object['correo'],
+      "token": object['token'],
+      "image": object['image']
+    }
 
-    };
+    localStorage.setItem('account', JSON.stringify(data));
+  }
 
-    return this.http.post(
-      `${ this.url }/signupNewUser?key=${ this.apikey }`,
-      authData
-    ).pipe(
-      map( resp =>{
-        this.guardarToken( resp['idToken'] );
-        return resp;
-      })
+  getAccount(){
+    //return this.account;
+    return localStorage.getItem('account');
+  }
+
+  nuevoUsuario(usuario: Usuario): Observable<any> {
+    let json = JSON.stringify(usuario);
+    let params = "register=" + json;
+    let headers = new HttpHeaders().set(
+      "Content-Type",
+      "application/x-www-form-urlencoded"
     );
 
+    return this.http.post(this.api + "register", params, {
+      headers: headers
+    });
   }
 
-  private guardarToken( idToken: string ){
+  public guardarToken( idToken: string ){
 
     this.userToken = idToken;
     localStorage.setItem('token',idToken);
@@ -84,7 +77,27 @@ export class AuthService {
     let hoy = new Date();
     hoy.setSeconds( 3600 );
 
-    localStorage.setItem('expira', hoy.getTime().toString() )
+    localStorage.setItem('expira', hoy.getTime().toString() );
+
+  }
+
+  
+
+  estaAutenticado(): boolean{
+
+    if (this.userToken.length < 2 ) {
+      return false;
+    }
+
+    const expira = Number(localStorage.getItem('expira'));
+    const expiraDate = new Date();
+    expiraDate.setTime(expira);
+
+    if ( expiraDate > new Date()) {
+      return true;
+    }else{
+      return false;
+    }
 
   }
 
@@ -104,22 +117,19 @@ export class AuthService {
 
   }
 
-  estaAutenticado(): boolean{
-
-    if (this.userToken.length < 2 ) {
-      return false;
+  token() {
+    let result = "";
+    let characters = "abcdefghijklmnopqrstvwxyz0123456789";
+    let charactersLength = characters.length;
+    for (let i = 0; i < 24; i++) {
+      result += characters.charAt(Math.floor(Math.random() * charactersLength));
     }
+    return result;
+  }
 
-    const expira = Number(localStorage.getItem('expira'));
-    const expiraDate = new Date();
-    expiraDate.setTime(expira);
-
-    if ( expiraDate > new Date()) {
-      return true;
-    }else{
-      return false;
-    }
-
+  logout(){ 
+    localStorage.removeItem('token');
+    localStorage.removeItem('account');
   }
 
 }

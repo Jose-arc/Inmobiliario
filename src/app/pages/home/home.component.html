@@ -1,20 +1,23 @@
-<div class="overlay-navigation">
-    <nav role="navigation">
-      <ul>
-        <li><a href="#" data-content="The beginning">Home</a></li>
-        <li><a href="#" data-content="Curious?">About</a></li>
-        <li><a href="#" data-content="I got game">Skills</a></li>
-        <li><a href="#" data-content="Only the finest">Works</a></li>
-        <li><a href="#" data-content="Don't hesitate">Contact</a></li>
-      </ul>
-    </nav>
+<nav class="navbar navbar-expand-md navbar-dark">
+    <div class="container">
+      <a class="navbar-brand" href="#">
+        <!--<img src="assets/img/logo.png" alt="logo"/>-->
+        <h2 class="title">Menu</h2>
+      </a>
+
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item dropdown dropdown-menu-right">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <img class="avatar" src="http://localhost/bd/api-rest/img-uploads/{{myAccount.image}}">
+          <span class="user">{{myAccount.name}}</span>
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="#">Action</a>
+          <a class="dropdown-item" href="#">Another action</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" (click)="salir()">Cerrar sesión</a>
+        </div>
+      </li>
+    </ul>
   </div>
-  
-  <section class="home">
-      <a href="https://codepen.io/fluxus/pen/gPWxXJ" target="_blank">Click for CSS version</a>
-    <div class="open-overlay">
-      <span class="bar-top"></span>
-      <span class="bar-middle"></span>
-      <span class="bar-bottom"></span>
-    </div>
-  </section>
+</nav>

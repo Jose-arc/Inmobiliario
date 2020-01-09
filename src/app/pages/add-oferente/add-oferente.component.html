@@ -118,8 +118,8 @@
                             <input type="checkbox" class="custom-control-input" id="ck1a{{ b }}" value="{{ i.Nombre }}" (click)="toggle(i.Nombre)" />
                             <label class="custom-control-label" for="ck1a{{ b }}">
               <img
-                src="http://localhost/bd/api-rest/img-uploads/{{
-                  i.Nombre
+                src="{{
+                  i.Nombre | rutaimg
                 }}"
                 alt="#"
                 class="img-fluid"

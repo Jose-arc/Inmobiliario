@@ -1,5 +1,10 @@
 <form #formPropiedad="ngForm" (ngSubmit)="onSubmit()">
     <div class="container-fluid">
+
+        <div>
+            <label>Valor UF : {{UF | uf}}</label>
+        </div>
+
         <div class="container">
             <div class="formBox">
 
@@ -247,8 +252,8 @@
                             <input type="checkbox" class="custom-control-input" id="ck1a{{ b }}" value="{{ i.Nombre }}" (click)="toggle(i.Nombre)" />
                             <label class="custom-control-label" for="ck1a{{ b }}">
               <img
-                src="http://localhost/bd/api-rest/img-uploads/{{
-                  i.Nombre
+                src="{{
+                  i.Nombre | rutaimg
                 }}"
                 alt="#"
                 class="img-fluid"
@@ -291,8 +296,8 @@
                             <input type="checkbox" class="custom-control-input" id="ck1b{{ c }}" value="{{ i.Nombre }}" (click)="toggleGaleria(i.Nombre)" />
                             <label class="custom-control-label" for="ck1b{{ c }}">
               <img
-                src="http://localhost/bd/api-rest/img-uploads/{{
-                  i.Nombre
+                src="{{
+                  i.Nombre | rutaimg
                 }}"
                 alt="#"
                 class="img-fluid"

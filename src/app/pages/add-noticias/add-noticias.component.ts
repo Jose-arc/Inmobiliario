@@ -87,7 +87,7 @@ export class AddNoticiasComponent implements OnInit {
 
   fileChangeEvent(fileInput: any) {
     this.archivosParaSubir = <Array<File>>fileInput.target.files;
-    console.log(this.archivosParaSubir);
+    //console.log(this.archivosParaSubir);
   }
 
   toggle(value) {
@@ -112,7 +112,7 @@ export class AddNoticiasComponent implements OnInit {
           result => {
             //console.log(result);
             this.resultadoSubida = result;
-            console.log(this.resultadoSubida);
+            //console.log(this.resultadoSubida);
             this.banco.nombre = this.resultadoSubida.nomimagen;
 
             this.guardarImg();
@@ -120,12 +120,7 @@ export class AddNoticiasComponent implements OnInit {
             Swal.close();
           },
           error => {
-            Swal.fire({
-              allowOutsideClick: false,
-              icon: "error",
-              title: "Error",
-              text: error
-            });
+            this._g.getMessage(error,"error","Problemas");
           }
         );
     }
@@ -135,9 +130,11 @@ export class AddNoticiasComponent implements OnInit {
     this._g.addbanco(this.banco).subscribe(
       result => {
         if (result.code == 200) {
-          console.log(result.mensaje);
+
+           //refresh subida de imagen
+           this.getBancoImg();
         } else {
-          console.log(result);
+          //console.log(result);
         }
       },
       error => {
@@ -150,10 +147,10 @@ export class AddNoticiasComponent implements OnInit {
     this._g.getBanco().subscribe(
       result => {
         if (result.code != 200) {
-          console.log(result);
+          //console.log(result);
         } else {
           this.bancoImg = result.mensaje;
-          console.log(this.bancoImg);
+          //console.log(this.bancoImg);
         }
       },
       error => {
@@ -172,10 +169,10 @@ export class AddNoticiasComponent implements OnInit {
     this._g.getTipo().subscribe(
       result => {
         if (result.code != 200) {
-          console.log(result);
+          this._g.getMessage(result.mensaje,"error","Categoria");
         } else {
-          // this.tipo = result.mensaje;
-          console.log(this.tipo);
+           this.tipo = result.mensaje;
+          //console.log(this.tipo);
         }
       },
       error => {

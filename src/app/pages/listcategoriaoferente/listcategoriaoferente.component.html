@@ -44,7 +44,7 @@
             <h1 class="my-4">Categorias</h1>
             <div class="list-group">
               <a *ngFor="let i of tipo" 
-              [routerLink]="['/categoria-noticia',i.Id]"
+              [routerLink]="['/categoria-oferente',i.Id]"
               class="list-group-item">{{i.Nombre}}</a>
             </div>
           </div>
@@ -113,7 +113,7 @@
                     <div class="card-group vgr-cards">
                       <div class="card" *ngFor="let i of oferente_categoria">
                         <div class="card-img-body">
-                        <img class="card-img" src="http://localhost/bd/api-rest/img-uploads/{{
+                        <img class="card-img" src="{{
                           i.image_oferente | firstimg
                         }}" alt="Card image cap">
                         </div>

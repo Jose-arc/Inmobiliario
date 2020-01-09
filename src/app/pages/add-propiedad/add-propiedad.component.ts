@@ -50,6 +50,9 @@ export class AddPropiedadComponent implements OnInit {
   public idPropiedad = this._ps.makeId();
   public fecha = this._g.fullFecha();
 
+  //Valor UF al dia
+  UF: any;
+
   constructor(private _ps : PropiedadesService,
               private _g : GlobalsService,
               private _router: Router,
@@ -67,6 +70,7 @@ export class AddPropiedadComponent implements OnInit {
     this.resultFormato();
     this.getMap();
     this.getNPropiedades();
+    this.consultaUF();
     
   }
 
@@ -165,7 +169,10 @@ export class AddPropiedadComponent implements OnInit {
     this._g.addbanco(this.banco).subscribe(
       result => {
         if (result.code == 200) {
-          console.log(result.mensaje);
+
+           //refresh subida de imagen
+           this.getBancoImg();
+
         } else {
           console.log(result);
         }
@@ -180,10 +187,11 @@ export class AddPropiedadComponent implements OnInit {
     this._g.getBanco().subscribe(
       result => {
         if (result.code != 200) {
-          console.log(result);
+          // console.log(result);
+          
         } else {
           this.bancoImg = result.mensaje;
-          console.log(this.bancoImg);
+          //console.log(this.bancoImg);
         }
       },
       error => {
@@ -230,7 +238,7 @@ export class AddPropiedadComponent implements OnInit {
           this.formato = result.mensaje;
         }
         else{
-          console.log( result.mensaje );
+          this._g.getMessage(result.mensaje,"error","Problemas");
         }
       },
       err =>{
@@ -247,7 +255,7 @@ export class AddPropiedadComponent implements OnInit {
           this.entrega = result.mensaje
         }
         else{
-          console.log( result.mensaje );
+          this._g.getMessage(result.mensaje,"Error","Problemas");
         }
       },
       err =>{
@@ -359,6 +367,23 @@ map.on('locationerror', onLocationError);
       }
     )
 
+  }
+
+  consultaUF(){
+    this._ps.getUF().subscribe(
+      result =>{
+        if (result == null) {
+          this._g.getMessage(result,"info","Problemas");
+        } else {
+          
+          this.UF = result.serie[0]['valor'];
+
+        }
+      },
+      error =>{
+        console.log(<any>error);
+      }
+    )
   }
   
 

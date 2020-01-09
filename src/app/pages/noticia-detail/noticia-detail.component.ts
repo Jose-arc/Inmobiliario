@@ -6,6 +6,7 @@ import { NoticiasService } from "src/app/services/noticias.service";
 
 import { GlobalsService } from "src/app/services/globals.service";
 import Swal from "sweetalert2";
+import { Noticias } from 'src/app/models/noticias.model';
 
 
 @Component({
@@ -15,7 +16,7 @@ import Swal from "sweetalert2";
 })
 export class NoticiaDetailComponent implements OnInit {
   
-  public noticia_detail: any[];
+  public noticia_detail: Noticias;
   public imgs: any[];
   public categorias : any[];
 
@@ -43,6 +44,7 @@ export class NoticiaDetailComponent implements OnInit {
         resp => {
           if (resp.code == 200) {
             this.noticia_detail = resp.data;
+            
             this.imgs = this._g.separadorImagenes(resp.data.imagen);
             Swal.close();
             // console.log(this.noticia_detail);

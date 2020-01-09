@@ -37,6 +37,8 @@ import { Ng2ImgMaxModule } from 'ng2-img-max';
 
 //Google Adsense para bloques de anuncios
 import { AdsenseModule } from 'ng2-adsense';
+import { UfPipe } from './pipes/uf.pipe';
+import { RutaimgPipe } from './pipes/rutaimg.pipe';
 
 @NgModule({
   declarations: [
@@ -58,7 +60,9 @@ import { AdsenseModule } from 'ng2-adsense';
     OferenteUpdateComponent,
     AddPropiedadComponent,
     PropiedadUpdateComponent,
-    PropiedadDetailComponent
+    PropiedadDetailComponent,
+    UfPipe,
+    RutaimgPipe
   ],
   imports: [BrowserModule, 
             FormsModule, 

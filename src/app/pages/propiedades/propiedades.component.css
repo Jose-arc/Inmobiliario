@@ -3,7 +3,7 @@
     width: 50%;
     opacity: 1;
     position: absolute;
-    box-shadow: 10px 6px 4px lightgrey;
+    box-shadow: 10px 6px 4px rgba(0,0,0,0.3);
     right: 50%;
     margin: 10px 10px 10px 10px;
     height: 1.6rem;

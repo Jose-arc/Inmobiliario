@@ -6,6 +6,8 @@ $app = new \Slim\Slim();
 
 $db = new mysqli('localhost','root','','bt_inmobiliario');
 
+$API_KEY = '3d524a53c110e4c22463b10ed32cef9d'; 
+
 header('Access-Control-Allow-Origin: *');
 header("Access-Control-Allow-Headers: X-API-KEY, Origin, X-Requested-With, Content-Type, Accept, Access-Control-Request-Method");
 header("Access-Control-Allow-Methods: GET, POST, OPTIONS, PUT, DELETE");
@@ -490,6 +492,114 @@ $app->get('/propiedades',function() use($app,$db){
 
 });
 
+//Filtro
+$app->get('/filtro',function() use($app,$db){
+
+    $comuna = $app->request->get('comuna');
+    $prop = $app->request->get('prop');
+    $form = $app->request->get('form');
+    $entr = $app->request->get('entr');
+
+    $query = "SELECT * FROM propiedades p where p.comuna like '%$comuna%' AND p.tipoprop LIKE '$prop' AND p.idformato like '$form' AND p.identrega LIKE '$entr' ";
+    $list = $db->query($query);
+
+    $propiedades = array();
+    while ($i = $list->fetch_assoc()) {
+        $propiedades[] = $i;
+    }
+
+    if ($propiedades != null) {
+        
+        $result = array(
+            'status' => 'success',
+            'code' => '200',
+            'mensaje' => $propiedades
+        );
+
+    }else{
+
+        $result = array(
+            'code' => '404',
+            'status' => 'error',
+            'mensaje' => 'No hay registros'
+        );
+
+    }
+
+    //echo $query;
+    echo json_encode($result);
+
+});
+
+
+//LISTAR ALL PROPIEDADES PAGADAS
+$app->get('/propiedadespago',function() use($app,$db){
+
+    $query = "SELECT * FROM vista_ispagoprop;";
+    $list = $db->query($query);
+
+    $propiedadespago = array();
+    while ($i = $list->fetch_assoc()) {
+        $propiedadespago[] = $i;
+    }
+
+    if ($propiedadespago != null) {
+        
+        $result = array(
+            'status' => 'success',
+            'code' => '200',
+            'mensaje' => $propiedadespago
+        );
+
+    }else{
+
+        $result = array(
+            'code' => '404',
+            'status' => 'error',
+            'mensaje' => 'No hay registros'
+        );
+
+    }
+
+
+    echo json_encode($result);
+
+});
+
+//LISTAR ALL PROPIEDADES PAGADAS
+$app->get('/propiedadesnopago',function() use($app,$db){
+
+    $query = "SELECT * FROM vista_ispagonullprop;";
+    $list = $db->query($query);
+
+    $propiedadesnopago = array();
+    while ($i = $list->fetch_assoc()) {
+        $propiedadesnopago[] = $i;
+    }
+
+    if ($propiedadesnopago != null) {
+        
+        $result = array(
+            'status' => 'success',
+            'code' => '200',
+            'mensaje' => $propiedadesnopago
+        );
+
+    }else{
+
+        $result = array(
+            'code' => '404',
+            'status' => 'error',
+            'mensaje' => 'No hay registros'
+        );
+
+    }
+
+
+    echo json_encode($result);
+
+});
+
 //UPDATE PROPIEDADES
 $app->post('/propiedades-update/:id',function($id) use($app,$db){
 
@@ -722,8 +832,8 @@ $app->post('/noticias',function() use($app,$db){
         $data['fecha'] = null;
     }
 
-    if (!isset($data['by'])) {
-        $data['by'] = null;
+    if (!isset($data['por'])) {
+        $data['por'] = null;
     }
 
     if (!isset($data['fullfecha'])) {
@@ -741,7 +851,7 @@ $app->post('/noticias',function() use($app,$db){
                     "'{$data['imagen']}',".
                     "'{$data['body']}',".
                     "'{$data['fecha']}',".
-                    "'{$data['by']}',".
+                    "'{$data['por']}',".
                     "'{$data['fullfecha']}',".
                     "'{$data['categoria']}');";
 
@@ -892,7 +1002,7 @@ $app->post('/noticias-update/:id',function($id) use($app,$db){
             "imagen = '{$data['imagen']}', ".
             "body = '{$data['body']}', ".
             "fecha = '{$data['fecha']}', ".
-            "by = '{$data['by']}', ".
+            "por = '{$data['por']}', ".
             "fullfecha = '{$data['fullfecha']}', ".
             "categoria = '{$data['categoria']}' ".
             "WHERE id = {$id}";
@@ -1023,6 +1133,9 @@ $app->get('/banco',function() use($app,$db){
     echo json_encode($result);
 
 });
+
+
+
 
 //Probar Stored Procedure
 $app->get('/categorianoticia/:id',function($id) use($db,$app){
@@ -1307,6 +1420,114 @@ $app->get('/entrega',function() use($app,$db){
 
 });
 //END
+
+//Login
+$app->get('/login',function() use($app,$db,$API_KEY){
+
+    $user = $app->request->get('user');
+    $pass = $app->request->get('pass');
+    $key = $app->request->get('key');
+
+    if ($key != $API_KEY) {
+        
+        $result = array(
+            'code' => '404',
+            'status' => 'error',
+            'mensaje' => 'Acceso Denegado'
+        );
+    }else{
+
+    $query = "SELECT * FROM login WHERE correo like '%$user%' AND contrasena LIKE '%$pass%'";
+    $list = $db->query($query);
+
+    if ($list->num_rows == 1) {
+            
+        $u = $list->fetch_assoc();  
+        
+        $result = array(
+            'code' => '200',
+            'status' => 'success',
+            'data' => $u
+        );
+
+    }else{
+        $result = array(
+            'code' => '404',
+            'status' => 'error',
+            'mensaje' => 'Error de auntentificacion'
+        );
+    }
+}
+
+    //echo $query;
+    echo json_encode($result);
+
+});
+
+//INSERTAR REGISTRO LOGIN
+$app->post('/register',function() use($app,$db){
+    
+    $json = $app->request->post('register');
+    $data = json_decode($json,true);
+
+    if (!isset($data['permiso'])) {
+        $data['permiso'] = null;
+    }
+
+    if (!isset($data['verificacion'])) {
+        $data['verificacion'] = null;
+    }
+
+    if (!isset($data['name'])) {
+        $data['name'] = null;
+    }
+
+    if (!isset($data['correo'])) {
+        $data['correo'] = null;
+    }
+
+    if (!isset($data['contrasena'])) {
+        $data['contrasena'] = null;
+    }
+
+    if (!isset($data['token'])) {
+        $data['token'] = null;
+    }
+
+    if (!isset($data['image'])) {
+        $data['image'] = null;
+    }
+
+
+    $query = "INSERT INTO login VALUES(NULL,NULL,".
+                    "'{$data['permiso']}',".
+                    "'{$data['verificacion']}',".
+                    "'{$data['name']}',".
+                    "'{$data['correo']}',".
+                    "'{$data['contrasena']}',".
+                    "'{$data['token']}',".
+                    "'{$data['image']}'".
+                    ");";
+
+    $insert = $db->query($query);
+    
+    $result = array(
+        'status' => 'error',
+        'code' => '404',
+        'mensaje' => 'no se añadio'
+    );
+
+    if($insert){
+        $result = array(
+            'status' => 'success',
+            'code' => '200',
+            'mensaje' => 'se añadio'
+        );
+    }
+
+    echo json_encode($result);
+    //echo $query;
+});
 
 
 $app->run(); //ejecuta todo los metodos insertos en este PHP

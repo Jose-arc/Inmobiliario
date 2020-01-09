@@ -52,7 +52,7 @@ export class NoticiaUpdateComponent {
         resp => {
           if (resp.code == 200) {
             this.noticias = resp.data;
-            console.log(this.noticias);
+            //console.log(this.noticias);
           } else {
             this._router.navigate(["/noticias"]);
           }
@@ -71,10 +71,10 @@ export class NoticiaUpdateComponent {
       this._ns.updateNoticias(id, this.noticias).subscribe(
         result => {
           if (result.code == 200) {
+            console.log(result);
             this._router.navigate(["/noticias"]);
           } else {
-            console.log(result);
-
+            //console.log(result);
             this._router.navigate(["/noticia/" + id]);
           }
         },
@@ -89,10 +89,10 @@ export class NoticiaUpdateComponent {
     this._g.getBanco().subscribe(
       result => {
         if (result.code != 200) {
-          console.log(result);
+          //console.log(result);
         } else {
           this.bancoImg = result.mensaje;
-          console.log(this.bancoImg);
+          //console.log(this.bancoImg);
         }
       },
       error => {

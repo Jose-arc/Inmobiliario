@@ -83,7 +83,7 @@ export class AddOferenteComponent implements OnInit {
           result => {
             //console.log(result);
             this.resultadoSubida = result;
-            console.log(this.resultadoSubida);
+            //console.log(this.resultadoSubida);
             this.banco.nombre = this.resultadoSubida.nomimagen;
 
             this.guardarImg();
@@ -106,9 +106,12 @@ export class AddOferenteComponent implements OnInit {
     this._g.addbanco(this.banco).subscribe(
       result => {
         if (result.code == 200) {
-          console.log(result.mensaje);
+          //refresh subida de imagen
+          this.getBancoImg();
+
         } else {
-          console.log(result);
+          //console.log(result);
+          this._g.getMessage(result.mensaje,"error","Subida de Imagen");
         }
       },
       error => {
@@ -121,10 +124,10 @@ export class AddOferenteComponent implements OnInit {
     this._g.getBanco().subscribe(
       result => {
         if (result.code != 200) {
-          console.log(result);
+          this._g.getMessage(result.mensaje,"error","Categorias");
         } else {
           this.bancoImg = result.mensaje;
-          console.log(this.bancoImg);
+          //console.log(this.bancoImg);
         }
       },
       error => {

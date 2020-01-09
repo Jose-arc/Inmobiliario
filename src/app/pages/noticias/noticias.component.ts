@@ -3,11 +3,8 @@ import { Component, OnInit } from "@angular/core";
 // Imports
 import { Router } from "@angular/router";
 import { NoticiasService } from "src/app/services/noticias.service";
-import { Noticias } from "src/app/models/noticias.model";
 import { GlobalsService } from "src/app/services/globals.service";
 import Swal from "sweetalert2";
-import { GLOBAL } from "src/app/models/global";
-import { Bancoimg } from "src/app/models/banco.model";
 
 @Component({
   selector: "app-noticias",
@@ -118,10 +115,10 @@ export class NoticiasComponent implements OnInit {
   getTipo() {
     this._g.getTipo().subscribe(result => {
       if (result.code != 200) {
-        console.log(result);
+        //console.log(result);
       } else {
         this.tipo = result.mensaje;
-        console.log(result.mensaje);
+        //console.log(result.mensaje);
       }
     });
   }

@@ -87,9 +87,9 @@
                 <div class="inputText">Escrito por</div>
                 <input
                   type="text"
-                  #By="ngModel"
-                  name="By"
-                  [(ngModel)]="noticias.by"
+                  #por="ngModel"
+                  name="por"
+                  [(ngModel)]="noticias.por"
                   class="input"
                   required
                 />
@@ -181,8 +181,8 @@
                 />
                 <label class="custom-control-label" for="ck1a{{ b }}">
                   <img
-                    src="http://localhost/bd/api-rest/img-uploads/{{
-                      i.Nombre
+                    src="{{
+                      i.Nombre | rutaimg
                     }}"
                     alt="#"
                     class="img-fluid"

@@ -40,7 +40,7 @@
       <!-- Author -->
       <p class="lead">
         Por 
-        <a href="#"> {{noticia_detail.by}}</a>
+        <a href="#"> {{noticia_detail.por}}</a>
       </p>
 
       <hr />
@@ -73,7 +73,7 @@
           <div class="carousel-item" *ngFor="let img of imgs">
             <img
               class="d-block img-fluid"
-              src="http://localhost/bd/api-rest/img-uploads/{{ img }}"
+              src="{{ img | rutaimg }}"
               alt="First slide"
             />
           </div>

@@ -103,14 +103,14 @@
                 </a>
             </div>
 
-            <div class="row">
+            <div class="row" id="resultado">
 
                 <div class="col-lg-4 col-md-6 mb-4" *ngFor="let p of propiedades">
                     <div class="card h-100">
                         <div *ngIf="p.ispago == 1" class="ispago">Premium</div>
                         <a href="#">
 
-                            <img class="card-img-top" src="http://localhost/bd/api-rest/img-uploads/{{propiedades.modelos}}" alt="">
+                            <img class="card-img-top" src="{{p.modelos | firstimg}}" alt="">
 
                         </a>
                         <div class="card-body">

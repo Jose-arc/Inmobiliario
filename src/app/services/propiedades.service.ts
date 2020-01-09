@@ -10,6 +10,8 @@ import { GLOBAL } from "../models/global";
 //Model
 import { Propiedad } from './../models/propiedad.model';
 
+import { GlobalsService } from 'src/app/services/globals.service';
+
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +21,8 @@ export class PropiedadesService {
   public api: string;
   //public prod_full: string;
 
-  constructor( public http: HttpClient ) {
+  constructor( public http: HttpClient,
+                private _g: GlobalsService ) {
 
     this.api = GLOBAL.dev;
 
@@ -87,4 +90,10 @@ export class PropiedadesService {
     }
     return result;
   }
+
+  getUF():Observable<any>{
+
+    return this.http.get(`https://mindicador.cl/api/uf/${this._g.getFecha()}`);
+  }
+  
 }

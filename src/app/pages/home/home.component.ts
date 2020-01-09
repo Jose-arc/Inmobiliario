@@ -10,10 +10,15 @@ import { Router } from '@angular/router';
 })
 export class HomeComponent implements OnInit {
 
+  public myAccount : any;
+  ax : any;
+
   constructor( private auth: AuthService,
-               private router: Router) { }
+               private router: Router) {}
 
   ngOnInit() {
+    this.ax = this.auth.getAccount();
+    this.myAccount = JSON.parse(this.ax);
   }
 
   salir(){
@@ -21,5 +26,6 @@ export class HomeComponent implements OnInit {
     this.auth.logout();
     this.router.navigateByUrl('/login');
   }
+
 
 }
