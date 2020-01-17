@@ -6,6 +6,7 @@ import { Propiedad } from "src/app/models/propiedad.model";
 import { GlobalsService } from "src/app/services/globals.service";
 import Swal from "sweetalert2";
 import { GLOBAL } from "src/app/models/global";
+import { AuthService } from 'src/app/services/auth.service';
 // import { Bancoimg } from "src/app/models/banco.model";
 
 // import L from 'leaflet'; 
@@ -34,12 +35,16 @@ export class PropiedadesComponent implements OnInit {
   tipoentr : any;
   //end
 
+  //Permisos
+  permisos : any;
+
   public img : string;
 
   constructor(
     private _ps: PropiedadesService,
     private _g: GlobalsService,
-    private _router: Router
+    private _router: Router,
+    private auth: AuthService
   ) { 
 
     this.titulo = 'Propiedades';
@@ -49,6 +54,8 @@ export class PropiedadesComponent implements OnInit {
 
   ngOnInit() {
     this.getPropiedades();
+
+    this.permisos = JSON.parse(this.auth.getAccount());
   }
 
   getPropiedades(){

@@ -1,23 +1,100 @@
-<nav class="navbar navbar-expand-md navbar-dark">
-    <div class="container">
-      <a class="navbar-brand" href="#">
-        <!--<img src="assets/img/logo.png" alt="logo"/>-->
-        <h2 class="title">Menu</h2>
-      </a>
 
-    <ul class="navbar-nav ml-auto">
-      <li class="nav-item dropdown dropdown-menu-right">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          <img class="avatar" src="http://localhost/bd/api-rest/img-uploads/{{myAccount.image}}">
-          <span class="user">{{myAccount.name}}</span>
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="#">Action</a>
-          <a class="dropdown-item" href="#">Another action</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" (click)="salir()">Cerrar sesión</a>
+<header class="header">
+    <nav class="navbar navbar-toggleable-md navbar-light pt-0 pb-0 ">
+      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+      </button>
+      <!-- <a class="navbar-brand p-0 mr-5" href="#"><img src="http://via.placeholder.com/61x14"></a> -->
+      <!-- <div class="float-left"> <a href="#" class="button-left"><span class="fa fa-fw fa-bars "></span></a> </div> -->
+      <div class="collapse navbar-collapse flex-row-reverse" id="navbarNavDropdown">
+        <ul class="navbar-nav">
+          <li class="nav-item dropdown messages-menu">
+            <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <i class="fa fa-thumbs-o-up"></i>
+              <span class="label label-success bg-success">2</span>
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+              <ul class="dropdown-menu-over list-unstyled">
+                <li class="header-ul text-center">Favoritos</li>
+                <li>
+                  <!-- inner menu: contains the actual data -->
+                  <ul class="menu list-unstyled">
+                    <li><!-- start message -->
+                    <a href="#">
+                      <div class="pull-left">
+                        <img src="{{myAccount.image | rutaimg}}" class="rounded-circle  " alt="User Image">
+                      </div>
+                      <h4>
+                      Support Team
+                      <small><i class="fa fa-clock-o"></i> 5 mins</small>
+                      </h4>
+                      <p>Why not buy a new awesome theme?</p>
+                    </a>
+                  </li>
+                  <!-- end message -->
+                 
+                </ul>
+              </li>
+              <li class="footer-ul text-center"><a href="#">Ver todos mis favoritos</a></li>
+            </ul>
+          </div>
+        </li>
+        
+        <li class="nav-item dropdown  user-menu">
+          <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <img src="{{myAccount.image | rutaimg}}" class="user-image" alt="User Image" >
+            <span class="hidden-xs">{{myAccount.name}}</span>
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <a class="dropdown-item" (click)="salir()">Cerrar sesión</a>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </nav>
+</header>
+<div class="main">
+  <aside>
+    <div class="sidebar left ">
+      <div class="user-panel">
+        <div class="pull-left image">
+          <img src="{{myAccount.image | rutaimg}}" class="rounded-circle" alt="User Image">
         </div>
+        <div class="pull-left info">
+          <p>{{myAccount.name}}</p>
+          <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+        </div>
+      </div>
+      <ul class="list-sidebar bg-defoult">
+        <li> <a href="#" data-toggle="collapse" data-target="#dashboard" class="collapsed active" > <i class="fa fa-home"></i> <span class="nav-label"> Propiedades </span> <span class="fa fa-chevron-left pull-right"></span> </a>
+        <ul class="sub-menu collapse" id="dashboard">
+          <li class="active"><a [routerLink]="['/add-propiedades']">Añadir Propiedad</a></li>
+          <li class="active"><a [routerLink]="['/propiedades']">Menu Propiedades</a></li>
+        </ul>
       </li>
+      
+      <li> <a href="#" data-toggle="collapse" data-target="#products" class="collapsed active" > <i class="fa fa-newspaper-o"></i> <span class="nav-label">Noticias</span> <span class="fa fa-chevron-left pull-right"></span> </a>
+      <ul class="sub-menu collapse" id="products">
+        <li class="active"><a [routerLink]="['/add-noticia']">Añadir Noticia</a></li>
+        <li class="active"><a [routerLink]="['/noticias']">Menu Noticias</a></li>
+      </ul>
+    </li>
+    
+    <li> <a href="#" data-toggle="collapse" data-target="#tables" class="collapsed active" ><i class="fa fa-handshake-o"></i> <span class="nav-label">Oferentes</span><span class="fa fa-chevron-left pull-right"></span></a>
+    <ul  class="sub-menu collapse" id="tables" >
+      <li><a [routerLink]="['/add-oferente']"> Añadir Oferente</a></li>
+      <li class="active"><a [routerLink]="['/oferente']">Menu Oferentes</a></li>
     </ul>
-  </div>
-</nav>
+  </li>
+
+  <li> <a href="#" data-toggle="collapse" data-target="#e-commerce" class="collapsed active" ><i class="fa fa-product-hunt"></i> <span class="nav-label">Proyectos</span><span class="fa fa-chevron-left pull-right"></span></a>
+  <ul  class="sub-menu collapse" id="e-commerce" >
+    <li><a href=""> Añadir Proyecto</a></li>
+    
+  </ul>
+</li>
+
+</ul>
+</div>
+</aside>
+</div>
