@@ -34,10 +34,21 @@
         <div class="col-lg-3">
 
             <h1 class="my-4">Filtro busqueda</h1>
+
             <div class="list-group">
                 <div class="form-group">
-                    <label for="exampleFormControlInput1">Comuna</label>
-                    <input type="text" class="form-control" placeholder="Puente Alto" [(ngModel)]="comuna">
+                    <form [formGroup]="stateForm">
+                        <mat-form-field>
+                          <input type="text" [(ngModel)]="comuna" matInput placeholder="Comuna" formControlName="stateGroup" required [matAutocomplete]="autoGroup">
+                            <mat-autocomplete #autoGroup="matAutocomplete">
+                              <mat-optgroup *ngFor="let group of stateGroupOptions | async" [label]="group.region">
+                                <mat-option *ngFor="let comuna of group.comunas" [value]="comuna">
+                                  {{comuna}}
+                                </mat-option>
+                            </mat-optgroup>
+                          </mat-autocomplete>
+                        </mat-form-field>
+                      </form>
                 </div>
                 <div class="form-group">
                     <label for="exampleFormControlSelect1">Tipo propiedad</label>
@@ -123,11 +134,11 @@
                         <div class="card-footer">
                             <small class="text-muted">{{p.fecha}}</small> <br>
 
-                            <button *ngIf="permisos.permiso < 2" class="btn btn-sm btn-danger" (click)="borrarConfirmado(p.id)">
+                            <button  class="btn btn-sm btn-danger" (click)="borrarConfirmado(p.id)">
                 <i class="fa fa-trash"></i>
               </button> &nbsp;
 
-                            <a *ngIf="permisos.permiso == 0 || permisos.permiso == 2 " [routerLink]="['/propiedad-update', p.id]" routerLinkActive="router-link-active" class="btn btn-sm btn-primary">
+                            <a [routerLink]="['/propiedad-update', p.id]" routerLinkActive="router-link-active" class="btn btn-sm btn-primary">
                                 <i class="fa fa-edit"></i>
                             </a>
                         </div>
@@ -138,7 +149,7 @@
             <div class="row">
                 <ng2-adsense
                     [adClient]="'ca-pub-5508568210841212'"
-                    [adSlot]="2459665283" [width]="320" [height]="108">
+                    [adSlot]="2459665283" [width]="320" [height]="108" [adtest]="on">
                 </ng2-adsense>
             </div>
             

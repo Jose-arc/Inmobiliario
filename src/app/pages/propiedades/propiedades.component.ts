@@ -7,13 +7,18 @@ import { GlobalsService } from "src/app/services/globals.service";
 import Swal from "sweetalert2";
 import { GLOBAL } from "src/app/models/global";
 import { AuthService } from 'src/app/services/auth.service';
-// import { Bancoimg } from "src/app/models/banco.model";
 
-// import L from 'leaflet'; 
-// import { GeoSearchControl, OpenStreetMapProvider } from 'leaflet-geosearch';
+//AutoComplete
+import {FormBuilder, FormGroup} from '@angular/forms';
+import {Observable} from 'rxjs';
+import {startWith, map} from 'rxjs/operators';
 
-// import { map, filter } from 'rxjs/operators';
-// import { pipe, of } from 'rxjs';
+export const _filter = (opt: string[], value: string): string[] => {
+  const filterValue = value.toLowerCase();
+
+  return opt.filter(item => item.toLowerCase().indexOf(filterValue) === 0);
+};
+//end
 
 @Component({
   selector: 'app-propiedades',
@@ -22,6 +27,17 @@ import { AuthService } from 'src/app/services/auth.service';
   providers: [PropiedadesService]
 })
 export class PropiedadesComponent implements OnInit {
+
+  //autoComplete
+  stateForm: FormGroup = this._formBuilder.group({
+    stateGroup: '',
+  });
+
+  stateGroups : any[];
+
+  stateGroupOptions: Observable<any[]>;
+  //end
+  
 
   public titulo : string;
   
@@ -44,7 +60,8 @@ export class PropiedadesComponent implements OnInit {
     private _ps: PropiedadesService,
     private _g: GlobalsService,
     private _router: Router,
-    private auth: AuthService
+    private auth: AuthService,
+    private _formBuilder: FormBuilder
   ) { 
 
     this.titulo = 'Propiedades';
@@ -54,9 +71,16 @@ export class PropiedadesComponent implements OnInit {
 
   ngOnInit() {
     this.getPropiedades();
-
-    this.permisos = JSON.parse(this.auth.getAccount());
-  }
+    //this.permisos = JSON.parse(this.auth.getAccount());
+    this.getCitys();
+    
+    this.stateGroupOptions = this.stateForm.get('stateGroup')!.valueChanges
+    .pipe(
+      startWith(''),
+      map(value => this._filterGroup(value))
+      );
+      
+    }
 
   getPropiedades(){
 
@@ -181,6 +205,28 @@ export class PropiedadesComponent implements OnInit {
               console.log(err);
             }
           )
+  }
+
+  private _filterGroup(value: string): any[] {
+    if (value) {
+      return this.stateGroups
+        .map(group => ({region: group.region, comunas: _filter(group.comunas, value)}))
+        .filter(group => group.comunas.length > 0);
+    }
+
+    return this.stateGroups;
+  }
+
+  getCitys(){
+    this._g.getCity().subscribe(
+      resp =>{
+        this.stateGroups = resp;
+        console.log(this.stateGroups);
+      },
+      err =>{
+        console.log(err);
+      }
+    )
   }
 
 

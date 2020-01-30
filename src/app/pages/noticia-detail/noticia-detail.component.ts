@@ -20,6 +20,15 @@ export class NoticiaDetailComponent implements OnInit {
   public imgs: any[];
   public categorias : any[];
 
+  getSliderClass(isFirst,isLast,isEven,isOdd){
+    return {
+      active: isFirst,
+      lastactive: isLast,
+      even: isEven,
+      odd: isOdd
+    }; 
+  }
+
   constructor(
     private _g: GlobalsService,
     private _ns: NoticiasService,
@@ -45,7 +54,8 @@ export class NoticiaDetailComponent implements OnInit {
           if (resp.code == 200) {
             this.noticia_detail = resp.data;
             
-            this.imgs = this._g.separadorImagenes(resp.data.imagen);
+            this.imgs = this._g.carruselImage(resp.data.imagen,'dev');
+            console.log(this.imgs);
             Swal.close();
             // console.log(this.noticia_detail);
             // console.log(this.imgs);

@@ -130,6 +130,37 @@ export class GlobalsService {
     return images;
   }
 
+  carruselImage(s: any , ruta: string){
+    let images = [];
+    let cadena = s;
+    let caracter = ",";
+    let inicio = 0;
+    let termino = cadena.length;
+    let rutadefinitiva;
+
+    if(ruta === 'dev'){
+      rutadefinitiva = GLOBAL.img_dev;
+    }
+    else if(ruta === 'prod'){
+      rutadefinitiva = GLOBAL.img_prod;
+    }
+    else {
+      rutadefinitiva = GLOBAL.img_dev;
+    }
+    
+    for (let i = 0; i < cadena.length; i++) {
+      if (cadena.charAt(i) == caracter) {
+        // console.log("Numero donde esta la , :" + i);
+        images.push(rutadefinitiva + cadena.substring(inicio, i));
+        inicio = i + 1;
+      }
+    }
+
+    images.push(rutadefinitiva + cadena.substring(inicio, termino));
+
+    return images;
+  }
+
   //Stored Procedures
 
   //End SP
@@ -161,6 +192,10 @@ export class GlobalsService {
       title: tituloAlerta,
       text: mensaje
     });
+  }
+
+  getCity(): Observable<any>{
+    return this.http.get("assets/data/city.json");
   }
 
   

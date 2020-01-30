@@ -1,7 +1,7 @@
-import { NgModule } from "@angular/core";
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
 import { BrowserModule } from "@angular/platform-browser";
 
-import { FormsModule } from "@angular/forms";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { HttpClientModule } from "@angular/common/http";
 
 import { AppRoutingModule } from "./app-routing.module";
@@ -23,13 +23,12 @@ import { ListcategoriaoferenteComponent } from './pages/listcategoriaoferente/li
 import { OferenteUpdateComponent } from './pages/oferente/oferente-update.component';
 import { AddPropiedadComponent } from './pages/add-propiedad/add-propiedad.component';
 import { PropiedadUpdateComponent } from './pages/propiedades/propiedades-update.component';
-
+import { PropiedadDetailComponent } from './pages/propiedad-detail/propiedad-detail.component';
 //End
 
 //Pipes
 import { FirstimgPipe } from "./pipes/firstimg.pipe";
 import { AcortadorTextPipe } from './pipes/acortador-text.pipe';
-import { PropiedadDetailComponent } from './pages/propiedad-detail/propiedad-detail.component';
 //end
 
 //Resize IMG
@@ -37,8 +36,13 @@ import { Ng2ImgMaxModule } from 'ng2-img-max';
 
 //Google Adsense para bloques de anuncios
 import { AdsenseModule } from 'ng2-adsense';
+
 import { UfPipe } from './pipes/uf.pipe';
 import { RutaimgPipe } from './pipes/rutaimg.pipe';
+
+//Material css
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AngularMaterialModule } from '../app/services/angular-material.module';
 
 @NgModule({
   declarations: [
@@ -65,15 +69,19 @@ import { RutaimgPipe } from './pipes/rutaimg.pipe';
     RutaimgPipe
   ],
   imports: [BrowserModule, 
-            FormsModule, 
+            FormsModule,
+            ReactiveFormsModule, 
             HttpClientModule, 
             AppRoutingModule,
             Ng2ImgMaxModule,
             AdsenseModule.forRoot({
               adClient: 'ca-pub-5508568210841212',
               adSlot: 2459665283,
-            })],
+            }),
+            AngularMaterialModule,
+            BrowserAnimationsModule],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class AppModule {}

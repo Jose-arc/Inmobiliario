@@ -57,25 +57,24 @@
         class="carousel slide my-4"
         data-ride="carousel"
       >
-        <ol class="carousel-indicators">
-          <li
-            data-target="#carouselExampleIndicators"
-            data-slide-to="0"
-            class="active"
-          ></li>
-          <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-          <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-        </ol>
+    
         <div class="carousel-inner" role="listbox" *ngIf="imgs">
-          <div class="carousel-item active">
+          <div class="carousel-item">
             <img class="d-block img-fluid" src="#" alt="" />
           </div>
-          <div class="carousel-item" *ngFor="let img of imgs">
-            <img
-              class="d-block img-fluid"
-              src="{{ img | rutaimg }}"
-              alt="First slide"
-            />
+          <div class="carousel-item" 
+          [ngClass]="getSliderClass(isFirst,isLast,isEven,isOdd)"
+          [ngStyle]="{
+              height: '100vh',
+              background: 'url(' + img + ')',
+              backgroundSize: 'cover'
+            }"
+          *ngFor="let img of imgs;
+                  index as i;
+                  first as isFirst;
+                  last as isLast;
+                  even as isEven;
+                  odd as isOdd">
           </div>
         </div>
         <a
